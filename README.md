@@ -11,8 +11,6 @@
   <img src="https://img.shields.io/badge/UI-Thai%20%2F%20English-475569?style=for-the-badge" alt="Thai and English">
 </p>
 
-![System repository preview](docs/assets/elin-repo-preview.svg)
-
 ## Project Summary
 
 This project is a custom-built AI assistant designed for industrial maintenance teams working in air-gapped environments.  
