@@ -31,28 +31,29 @@
 
   <rect x="76" y="72" width="1128" height="576" rx="30" fill="url(#card)" stroke="#28445F"/>
 
-  <text x="120" y="138" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="24" letter-spacing="4">PROJECT SHOWCASE</text>
-  <text x="120" y="210" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="700">Elin</text>
-  <text x="120" y="268" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="30">
-    <tspan x="120" dy="0">Offline AI assistant for factory maintenance</tspan>
-    <tspan x="120" dy="38">and technical support</tspan>
+  <text x="120" y="138" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="24" letter-spacing="4">SYSTEM SHOWCASE</text>
+  <text x="120" y="198" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700">Factory Maintenance</text>
+  <text x="120" y="254" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700">AI System</text>
+  <text x="120" y="314" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="28">
+    <tspan x="120" dy="0">Offline support for repair analytics</tspan>
+    <tspan x="120" dy="36">and technical operations</tspan>
   </text>
 
-  <text x="120" y="362" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Core stack</text>
+  <text x="120" y="398" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Core stack</text>
   <g>
-    <rect x="120" y="392" width="182" height="50" rx="25" fill="#12324B"/>
-    <text x="149" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FastAPI</text>
-    <rect x="316" y="392" width="176" height="50" rx="25" fill="#12324B"/>
-    <text x="352" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Ollama</text>
-    <rect x="506" y="392" width="160" height="50" rx="25" fill="#12324B"/>
-    <text x="550" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">SQLite</text>
-    <rect x="680" y="392" width="146" height="50" rx="25" fill="#12324B"/>
-    <text x="724" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FAISS</text>
+    <rect x="120" y="428" width="182" height="50" rx="25" fill="#12324B"/>
+    <text x="149" y="460" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FastAPI</text>
+    <rect x="316" y="428" width="176" height="50" rx="25" fill="#12324B"/>
+    <text x="352" y="460" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Ollama</text>
+    <rect x="506" y="428" width="160" height="50" rx="25" fill="#12324B"/>
+    <text x="550" y="460" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">SQLite</text>
+    <rect x="680" y="428" width="146" height="50" rx="25" fill="#12324B"/>
+    <text x="724" y="460" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FAISS</text>
   </g>
 
-  <text x="120" y="497" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Highlights</text>
-  <text x="120" y="544" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- Custom orchestration with multi-pipeline routing</text>
-  <text x="120" y="582" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- SQL analytics + vector retrieval + hybrid reasoning</text>
+  <text x="120" y="533" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Highlights</text>
+  <text x="120" y="580" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- Custom orchestration with multi-pipeline routing</text>
+  <text x="120" y="618" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- SQL analytics + vector retrieval + hybrid reasoning</text>
 
   <rect x="774" y="146" width="364" height="392" rx="28" fill="#0A1724" stroke="#24465F"/>
   <rect x="804" y="182" width="166" height="34" rx="17" fill="#173652"/>
@@ -78,6 +79,6 @@
 
   <text x="804" y="576" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600">
     <tspan x="804" dy="0">Thai / English  |  Offline-ready</tspan>
-    <tspan x="804" dy="24">Portfolio showcase build</tspan>
+    <tspan x="804" dy="24">System showcase layout</tspan>
   </text>
 </svg>

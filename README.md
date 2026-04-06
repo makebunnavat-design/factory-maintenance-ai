@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/UI-Thai%20%2F%20English-475569?style=for-the-badge" alt="Thai and English">
 </p>
 
-![Elin repository preview](docs/assets/elin-repo-preview.svg)
+![System repository preview](docs/assets/elin-repo-preview.svg)
 
 ## Project Summary
 
@@ -23,7 +23,7 @@ This project is positioned as:
 - an offline-first industrial AI system
 - a multi-pipeline maintenance assistant
 - a practical example of custom orchestration over local models
-- a portfolio-ready case study in AI systems design
+- a system-level case study in AI systems design
 
 ## Why This Project Stands Out
 
@@ -84,9 +84,9 @@ User / Browser
 
 For the full breakdown, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-## Portfolio / Demo Layer
+## System Showcase / Demo Layer
 
-This repository includes a portfolio-friendly static showcase page in [`portfolio/`](portfolio/README.md).
+This repository includes a static system showcase page in [`portfolio/`](portfolio/README.md).
 
 - Open [`portfolio/index.html`](portfolio/index.html) locally for the mockup/showcase
 - Use `portfolio/` as a lightweight presentation layer for GitHub Pages or project demos
@@ -156,7 +156,7 @@ That keeps Git history focused on source code, reusable assets, and documentatio
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): system architecture overview
 - [`docs/GITHUB_PROFILE_COPY.md`](docs/GITHUB_PROFILE_COPY.md): ready-to-use GitHub profile text
-- [`portfolio/README.md`](portfolio/README.md): notes for the portfolio showcase page
+- [`portfolio/README.md`](portfolio/README.md): notes for the system showcase page
 
 ## Why This Repo Is Useful In A Hiring Context
 
@@ -174,4 +174,3 @@ If you are reviewing this project as a hiring manager or technical lead, the bes
 2. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 3. [`portfolio/index.html`](portfolio/index.html)
 4. [`backend/main.py`](backend/main.py)
-

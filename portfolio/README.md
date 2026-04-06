@@ -1,6 +1,6 @@
-# Elin Portfolio Showcase
+# System Showcase
 
-This folder contains a portfolio-oriented static showcase page for the Elin project.
+This folder contains a static showcase page for the factory maintenance AI system.
 
 ## Files
 
@@ -10,4 +10,4 @@ This folder contains a portfolio-oriented static showcase page for the Elin proj
 
 ## Suggested usage
 
-Open `portfolio/index.html` locally, or publish this folder with GitHub Pages for a portfolio-friendly project presentation.
+Open `portfolio/index.html` locally, or publish this folder with GitHub Pages for a clean system presentation.

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elin Portfolio Showcase</title>
-    <meta name="description" content="Portfolio showcase for Elin, an offline AI assistant for factory maintenance and technical support.">
+    <title>Factory Maintenance AI System Showcase</title>
+    <meta name="description" content="System showcase for an offline AI system for factory maintenance and technical support.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
         <div class="ambient ambient-two" aria-hidden="true"></div>
         <header class="site-header">
             <div class="brand-lockup">
-                <span class="brand-kicker">Portfolio Build</span>
-                <span class="brand-name">ELIN</span>
+                <span class="brand-kicker">System Showcase</span>
+                <span class="brand-name">Factory Maintenance AI System</span>
             </div>
             <nav class="site-nav">
                 <a href="#overview">Overview</a>
@@ -27,16 +27,16 @@
         <main>
             <section class="hero section" id="overview">
                 <div class="hero-copy reveal-on-scroll is-visible">
-                    <p class="eyebrow">Offline AI Assistant for Manufacturing Ops</p>
-                    <h1>Elin turns factory repair data into answers that feel fast, calm, and reliable.</h1>
+                    <p class="eyebrow">Offline AI System for Manufacturing Ops</p>
+                    <h1>Factory Maintenance AI System turns repair data into answers that feel fast, calm, and reliable.</h1>
                     <p class="hero-text">
-                        โปรเจกต์นี้ออกแบบมาเพื่อช่วยงานซ่อมบำรุงและ technical support ในโรงงานแบบ 100% offline
-                        ด้วย FastAPI, Local LLM, SQL analytics, และ vector retrieval ที่ทำงานใน LAN ได้จริง
-                        โดยไม่พึ่ง API ภายนอกเลย
+                        This project is designed to support maintenance and technical operations in a 100% offline factory
+                        environment. It combines FastAPI, local LLMs, SQL analytics, and vector retrieval so operators can
+                        ask real production questions inside a secure LAN without relying on external APIs.
                     </p>
                     <div class="hero-actions">
-                        <a class="btn btn-primary" href="#architecture">ดู Architecture</a>
-                        <a class="btn btn-secondary" href="#story">อ่าน Case Study</a>
+                        <a class="btn btn-primary" href="#architecture">View Architecture</a>
+                        <a class="btn btn-secondary" href="#story">Read Case Study</a>
                     </div>
                     <div class="hero-stats">
                         <article class="stat-card">
@@ -64,37 +64,38 @@
                         <div class="browser-body browser-body--showcase">
                             <aside class="mock-sidebar mock-sidebar--app">
                                 <div class="mock-profile-card">
-                                    <div class="mock-profile-avatar">E</div>
+                                    <div class="mock-profile-avatar">S</div>
                                     <div class="mock-profile-copy">
-                                        <strong>Elin CMM&amp;CE engineer</strong>
-                                        <span>ระบบผู้ช่วยซ่อมบำรุงในโรงงาน</span>
+                                        <strong>Factory Maintenance AI System</strong>
+                                        <span>Offline maintenance and technical support interface</span>
                                     </div>
                                 </div>
 
                                 <div class="mock-sidebar-group">
-                                    <div class="mock-sidebar-title">โหมด</div>
-                                    <div class="mock-chip active">โหมดปกติ</div>
+                                    <div class="mock-sidebar-title">Modes</div>
+                                    <div class="mock-chip active">Repair Mode</div>
                                     <div class="mock-chip">Meta Mode</div>
                                 </div>
 
                                 <div class="mock-sidebar-group">
-                                    <div class="mock-sidebar-title">คำสั่งลัด</div>
-                                    <div class="mock-chip mock-chip--accent-pink">สรุปเครื่องเสียวันนี้</div>
-                                    <div class="mock-chip mock-chip--accent-cyan">แผน PM เดือนนี้</div>
-                                    <div class="mock-chip mock-chip--accent-yellow">คู่มือ</div>
-                                    <div class="mock-chip mock-chip--accent-blue">Tech Status</div>
+                                    <div class="mock-sidebar-title">Quick Actions</div>
+                                    <div class="mock-chip mock-chip--accent-pink">Today&apos;s machine issues</div>
+                                    <div class="mock-chip mock-chip--accent-cyan">This month&apos;s PM plan</div>
+                                    <div class="mock-chip mock-chip--accent-yellow">Manual lookup</div>
+                                    <div class="mock-chip mock-chip--accent-blue">Tech status</div>
                                 </div>
                             </aside>
 
                             <section class="mock-app-canvas">
                                 <div class="mock-chat-view">
                                     <div class="mock-thread-row">
-                                        <div class="mock-thread-avatar">E</div>
+                                        <div class="mock-thread-avatar">S</div>
                                         <div class="mock-thread-card mock-thread-card--welcome">
-                                            <div class="mock-thread-title">สวัสดีค่ะ วันนี้ให้ Elin ช่วยอะไรดีคะ</div>
+                                            <div class="mock-thread-title">How can the system help with maintenance work today?</div>
                                             <div class="mock-thread-text">
-                                                ค้นหาประวัติการซ่อม ตรวจสอบเครื่องที่เสียบ่อย เช็กแผน PM ของเครื่องจักร
-                                                และช่วยวิเคราะห์จาก Process, Line, ชื่อช่าง หรือช่วงเวลาได้ในหน้าจอเดียว
+                                                Search repair history, inspect repeated machine failures, review PM plans,
+                                                and analyze issues by process, line, technician, or time window from one
+                                                interface built for factory teams.
                                             </div>
                                         </div>
                                         <div class="mock-thread-audio">🔊</div>
@@ -103,8 +104,8 @@
                                     <div class="mock-thread-row">
                                         <div class="mock-thread-avatar mock-thread-avatar--meta">M</div>
                                         <div class="mock-thread-card mock-thread-card--meta">
-                                            <div class="mock-thread-label">Project Showcase</div>
-                                            <div class="mock-thread-title">กำลังวิเคราะห์หลายแหล่งข้อมูลแบบ Hybrid</div>
+                                            <div class="mock-thread-label">System View</div>
+                                            <div class="mock-thread-title">Hybrid analysis across multiple maintenance data sources</div>
                                             <div class="loading-steps">
                                                 <span>Entity Match</span>
                                                 <span>SQL Analytics</span>
@@ -112,8 +113,9 @@
                                                 <span>Summary</span>
                                             </div>
                                             <div class="mock-thread-text">
-                                                ตัวอย่างนี้สื่อให้เห็นว่า Elin ไม่ได้ตอบแบบ chatbot ทั่วไป
-                                                แต่เลือก pipeline ตามชนิดคำถามและสรุปผลให้คนหน้างานอ่านง่าย
+                                                This example shows that the system does not answer like a generic chatbot.
+                                                It chooses the right path for each question, then combines structured data
+                                                and retrieved evidence into a usable summary for real operators.
                                             </div>
                                         </div>
                                         <div class="mock-thread-audio">🔊</div>
@@ -121,7 +123,7 @@
                                 </div>
 
                                 <div class="mock-composer">
-                                    <span class="mock-composer-placeholder">พิมพ์คำถามเกี่ยวกับ Line, Process, PM หรือสาเหตุการเสีย...</span>
+                                    <span class="mock-composer-placeholder">Ask about lines, processes, PM, failure history, or root causes...</span>
                                     <span class="mock-composer-send"></span>
                                 </div>
                             </section>
@@ -141,12 +143,12 @@
 
             <section class="section split-section">
                 <div class="panel reveal-on-scroll">
-                    <p class="eyebrow">What makes it portfolio-worthy</p>
+                    <p class="eyebrow">What makes it system-level</p>
                     <h2>Not just a chatbot</h2>
                     <p>
-                        Elin is positioned as a factory decision assistant. It does not only chat back, but decides
-                        when to answer conversationally, when to query repair history, when to retrieve similar repair cases,
-                        and when to combine both paths for hybrid reasoning.
+                        This factory maintenance AI system is positioned as a decision assistant. It does not only chat back,
+                        but decides when to answer conversationally, when to query repair history, when to retrieve similar
+                        repair cases, and when to combine both paths for hybrid reasoning.
                     </p>
                 </div>
                 <div class="panel reveal-on-scroll">
@@ -185,22 +187,22 @@
                     <article class="architecture-tile reveal-on-scroll">
                         <span class="tile-index">01</span>
                         <h3>Deterministic + LLM Router</h3>
-                        <p>เริ่มจาก entity signal และ domain rules ก่อน แล้วให้ LLM ช่วยเฉพาะส่วนที่กำกวมมากขึ้น</p>
+                        <p>Entity signals and domain rules handle most routing, while the local model resolves only the ambiguous cases.</p>
                     </article>
                     <article class="architecture-tile reveal-on-scroll">
                         <span class="tile-index">02</span>
                         <h3>SQL Analytics Path</h3>
-                        <p>ดึงข้อเท็จจริงจาก repair/PM database ด้วย generated SQL ที่มี guardrails และ retry safety</p>
+                        <p>Repair and PM facts come from generated SQL with safety rules, retry logic, and controlled execution.</p>
                     </article>
                     <article class="architecture-tile reveal-on-scroll">
                         <span class="tile-index">03</span>
                         <h3>Vector Knowledge Path</h3>
-                        <p>ค้นหา repair logs และ knowledge fragments ด้วย FAISS + embeddings + reranking</p>
+                        <p>Similar repair cases and knowledge fragments are retrieved through FAISS, embeddings, and reranking.</p>
                     </article>
                     <article class="architecture-tile reveal-on-scroll">
                         <span class="tile-index">04</span>
                         <h3>Hybrid Reasoning</h3>
-                        <p>ใช้ structured data หา top issue ก่อน แล้วเอาไปหาหลักฐานเชิงข้อความเพื่ออธิบายสาเหตุและแนวทางแก้</p>
+                        <p>Structured analytics identify the top issue first, then retrieval adds supporting evidence and explanation.</p>
                     </article>
                 </div>
             </section>
@@ -208,24 +210,24 @@
             <section class="section" id="highlights">
                 <div class="section-heading reveal-on-scroll">
                     <p class="eyebrow">Project Highlights</p>
-                    <h2>What this portfolio page is trying to show</h2>
+                    <h2>What this system page is trying to show</h2>
                 </div>
                 <div class="highlight-grid">
                     <article class="highlight-card reveal-on-scroll">
                         <h3>System Thinking</h3>
-                        <p>ไม่ได้โชว์แค่ UI แต่โชว์ว่าออกแบบ flow สำหรับ user ที่ต้องรอคำตอบจากหลาย pipeline ยังไง</p>
+                        <p>The page shows how the product experience supports users who wait on answers generated from multiple pipelines.</p>
                     </article>
                     <article class="highlight-card reveal-on-scroll">
                         <h3>Domain Fit</h3>
-                        <p>ตัวระบบไม่ generic แต่ tune ให้เข้ากับศัพท์ซ่อม, line ผลิต, PM task, และ query แบบหน้างานจริง</p>
+                        <p>The system is tuned for maintenance terms, line names, PM tasks, and the way factory teams actually ask questions.</p>
                     </article>
                     <article class="highlight-card reveal-on-scroll">
                         <h3>Offline Practicality</h3>
-                        <p>รองรับ local model, local DB, local vector index และ deployment ที่เหมาะกับโรงงานจริง</p>
+                        <p>It is designed around local models, local databases, local vector indexes, and deployment patterns suited to factories.</p>
                     </article>
                     <article class="highlight-card reveal-on-scroll">
-                        <h3>Portfolio Framing</h3>
-                        <p>หน้า showcase นี้ช่วยให้ repo ดูเป็น product case study มากกว่าการแปะ source code เปล่า ๆ</p>
+                        <h3>System Framing</h3>
+                        <p>This showcase helps the repository read like a real operational system instead of a loose collection of source files.</p>
                     </article>
                 </div>
             </section>
@@ -233,35 +235,35 @@
             <section class="section story-section" id="story">
                 <div class="section-heading reveal-on-scroll">
                     <p class="eyebrow">Builder Story</p>
-                    <h2>How to talk about Elin in interviews or GitHub</h2>
+                    <h2>How to talk about this system in interviews or GitHub</h2>
                 </div>
                 <div class="story-timeline">
                     <article class="story-step reveal-on-scroll">
                         <span class="story-number">01</span>
                         <div>
                             <h3>The problem</h3>
-                            <p>โรงงานมีข้อมูลซ่อมเยอะ แต่ทีมใช้งานต้องการคำตอบที่สรุปไว ตรง และอธิบายเชิงสาเหตุได้</p>
+                            <p>Factory teams have large volumes of repair data, but operators need answers that are short, direct, and still explain root cause.</p>
                         </div>
                     </article>
                     <article class="story-step reveal-on-scroll">
                         <span class="story-number">02</span>
                         <div>
                             <h3>The approach</h3>
-                            <p>ออกแบบ custom orchestration ให้เลือกใช้ SQL, RAG, หรือ hybrid reasoning ตามลักษณะคำถาม</p>
+                            <p>Custom orchestration selects SQL, retrieval, or hybrid reasoning based on the shape of each question.</p>
                         </div>
                     </article>
                     <article class="story-step reveal-on-scroll">
                         <span class="story-number">03</span>
                         <div>
                             <h3>The engineering challenge</h3>
-                            <p>ต้องแม่นในศัพท์โรงงาน, ต้อง offline, ต้องปลอดภัยต่อฐานข้อมูล, และต้องตอบไวพอสำหรับคนหน้างาน</p>
+                            <p>The system must understand factory terms, stay offline, protect internal data, and still answer quickly enough for operational use.</p>
                         </div>
                     </article>
                     <article class="story-step reveal-on-scroll">
                         <span class="story-number">04</span>
                         <div>
-                            <h3>The portfolio angle</h3>
-                            <p>นี่คือโปรเจกต์ที่โชว์ทั้ง backend thinking, AI systems design, data workflow, และ UX สำหรับ operational tools</p>
+                            <h3>The system angle</h3>
+                            <p>This project showcases backend thinking, AI systems design, data workflow design, and UX choices for operational tools.</p>
                         </div>
                     </article>
                 </div>
@@ -269,8 +271,8 @@
         </main>
 
         <footer class="site-footer reveal-on-scroll">
-            <p>Designed as a portfolio-friendly landing page for the Elin project.</p>
-            <p class="footer-note">Suggested next step: publish this folder with GitHub Pages or keep it as a showcase folder inside the repo.</p>
+            <p>Designed as a system showcase landing page for the factory maintenance AI system.</p>
+            <p class="footer-note">Suggested next step: publish this folder with GitHub Pages or keep it as a showcase layer inside the repo.</p>
         </footer>
     </div>
 

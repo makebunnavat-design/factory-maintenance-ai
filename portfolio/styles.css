@@ -126,7 +126,9 @@ a {
 .brand-name {
     font-size: 1.24rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.03em;
+    max-width: 340px;
+    line-height: 1.2;
 }
 
 .site-nav {
