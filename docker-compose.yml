@@ -1,0 +1,116 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 8G  # Increase memory limit to 8GB
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  repair-sync-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: repair-sync-worker
+    volumes:
+      - ./backend/data/repair_data.db:/app/data/repair_data.db:ro
+      - ./backend/data/PM2025.db:/app/data/PM2025.db:ro
+      - ./backend/data/repair_enriched.db:/app/data/repair_enriched.db
+      - ./backend/data/meta_database.db:/app/data/meta_database.db
+      - ./frontend/static:/app/frontend/static
+      - ./backend/models:/app/models
+      - ./backend/vector_index:/app/vector_index
+      - ./backend/data/ai_observability.jsonl:/app/data/ai_observability.jsonl
+      - ./backend/data/qa_log.jsonl:/app/data/qa_log.jsonl
+      - ./backend/data/tech_list_from_db.json:/app/data/tech_list_from_db.json
+      - ./backend/data/tech_mapping.json:/app/data/tech_mapping.json
+      - ./backend/data/line_pm_mapping.json:/app/data/line_pm_mapping.json
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HUB_OFFLINE=1
+      - TRANSFORMERS_OFFLINE=1
+      - APP_ROLE=sync-worker
+      - STARTUP_DATA_SYNC_ENABLED=1
+      - REALTIME_SYNC_ENABLED=1
+      - STARTUP_EMBEDDING_CHECK_ENABLED=1
+      - API_BACKGROUND_REFRESH_ENABLED=0
+      - OLLAMA_HOST=http://ollama_service:11434
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /app/data/repair_enriched.db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  repair-chatbot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: repair-chatbot
+    ports:
+      - "18080:18080"
+    volumes:
+      # Mount source databases (synced from O:\ via Windows PowerShell script)
+      - ./backend/data/repair_data.db:/app/data/repair_data.db:ro
+      - ./backend/data/PM2025.db:/app/data/PM2025.db:ro
+      
+      # Mount work database (processed data with embeddings)
+      - ./backend/data/repair_enriched.db:/app/data/repair_enriched.db
+      
+      # Mount meta database (knowledge base - read/write)
+      - ./backend/data/meta_database.db:/app/data/meta_database.db
+      
+      # Mount frontend static files (read-write for TTS cache)
+      - ./frontend/static:/app/frontend/static
+      
+      # Mount models for offline use
+      - ./backend/models:/app/models
+      
+      # Mount vector index for FAISS search
+      - ./backend/vector_index:/app/vector_index
+      
+      # Mount data files for persistence
+      - ./backend/data/ai_observability.jsonl:/app/data/ai_observability.jsonl
+      - ./backend/data/qa_log.jsonl:/app/data/qa_log.jsonl
+      - ./backend/data/tech_list_from_db.json:/app/data/tech_list_from_db.json
+      - ./backend/data/tech_mapping.json:/app/data/tech_mapping.json
+      - ./backend/data/line_pm_mapping.json:/app/data/line_pm_mapping.json
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HUB_OFFLINE=1  # Use local models only (no downloads)
+      - TRANSFORMERS_OFFLINE=1
+      - APP_ROLE=api
+      - STARTUP_DATA_SYNC_ENABLED=0
+      - REALTIME_SYNC_ENABLED=0
+      - STARTUP_EMBEDDING_CHECK_ENABLED=0
+      - API_BACKGROUND_REFRESH_ENABLED=0
+      - OLLAMA_HOST=http://ollama_service:11434
+      # ลบ CUDA_VISIBLE_DEVICES เพื่อใช้ CPU เท่านั้น
+    depends_on:
+      - ollama
+      - repair-sync-worker
+    restart: unless-stopped
+    # ลบ GPU allocation - ใช้ CPU เท่านั้น
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:18080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  ollama_data:
+    driver: local

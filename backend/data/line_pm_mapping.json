@@ -1,0 +1,139 @@
+
+{
+  "comment": "คู่ความหมายเดียวกัน: คอลัมน์แรก = Line (repairs_enriched), คอลัมน์สอง = Task Name (PM). ใช้ค่าตามประเภทคำถาม",
+  "pairs": [
+    ["PCB-A", "PCB LINE A"],
+    ["PCB A", "PCB LINE A"],
+    ["PCB_A_PM11", "PCB LINE A"],
+    
+    ["PCB-B", "PCB LINE B"],
+    ["PCB B", "PCB LINE B"],
+    ["PCB_B_PM12", "PCB LINE B"],
+    
+    ["PCB-C", "PCB LINE C"],
+    ["PCB C", "PCB LINE C"],
+    ["PCB_C_PM11", "PCB LINE C"],
+    
+    ["PCB-D", "PCB LINE D"],
+    ["PCB D", "PCB LINE D"],
+    ["PCB_D_PM12", "PCB LINE D"],
+    ["PCB_D_PM11", "PCB LINE D"],
+    
+    ["PCB-E", "PCB LINE E"],
+    ["PCB E", "PCB LINE E"],
+    ["PCB_E_PM11", "PCB LINE E"],
+    
+    ["PCB-F", "PCB LINE F"],
+    ["PCB F", "PCB LINE F"],
+    ["PCB-F", "PCB LINE F"],
+    ["PCB_F_PM12", "PCB LINE F"],
+    ["PCB F(PMย่อย)", "PCB LINE F"],
+    ["PCB F (PMย่อย 17.30-20.00)", "PCB LINE F"],
+    
+    ["PCB-I", "PCB LINE I"],
+    ["PCB I", "PCB LINE I"],
+    ["PCB_I_PM12", "PCB LINE I"],
+    
+    ["PCB-K", "PCB LINE K"],
+    ["PCB K", "PCB LINE K"],
+    
+    ["ELM HONDA_Ins", "PM CMM1 Line ELM"],
+    ["ELM_Ins", "PM CMM1 Line ELM"],
+    ["CMM1 ELM", "PM CMM1 Line ELM"],
+    
+    ["TOYOTA_INS", "PM CE1 LINE Toyota LED"],
+    ["TOYOTA_ASSY", "PM CE1 LINE Toyota LED"],
+    ["TOYOTA_Isp", "PM CE1 LINE Toyota LED"],
+    ["TOYOTA LED INS", "PM CE1 LINE Toyota LED"],
+    ["CE1 TOYOTA LED", "PM CE1 LINE Toyota LED"],
+    
+    ["SKY-G", "PM CE1 Line SKY-G(All Process)"],
+    ["SkKY-G", "PM CE1 Line SKY-G(All Process)"],
+    ["CE1 SKY-G", "PM CE1 Line SKY-G(All Process)"],
+    
+    ["FPC 1", "PM CE1 LINE FPC1"],
+    ["FPC1", "PM CE1 LINE FPC1"],
+    ["CE1 FPC1", "PM CE1 LINE FPC1"],
+    
+    ["FPC2", "PM CE1 Line FPC2(All process)"],
+    ["CE1 FPC2", "PM CE1 Line FPC2(All process)"],
+    
+    ["8G ECU", "PM LINE 8G"],
+    ["8G-ECU", "PM LINE 8G"],
+    ["CE1 8G ECU", "PM LINE 8G"],
+    
+    ["TRUCK", "PM CE2 Line Truck"],
+    ["CE2 TRUCK", "PM CE2 Line Truck"],
+    ["PM LINE TRUCK,VANm", "PM CE2 Line Truck"],
+    
+    ["VANm", "PM CE2 Line VANm"],
+    ["CE2 VANm", "PM CE2 Line VANm"],
+    
+    ["AIR_BAG", "PM CE2 Line Airbag"],
+    ["AIRBAG", "PM CE2 Line Airbag"],
+    ["CE2 AIRBAG", "PM CE2 Line Airbag"],
+    
+    ["MAZDA LED", "PM CE2 Line Mazda LED"],
+    ["CE2 MAZDA LED", "PM CE2 Line Mazda LED"],
+    
+    ["LED_Manul", "PM CE2 Line LED Manual"],
+    ["LED Manual", "PM CE2 Line LED Manual"],
+    ["CE2 LED MANUAL", "PM CE2 Line LED Manual"],
+    
+    ["LED_OFF_LINE", "PM CE2 Line LED Auto"],
+    ["LED Auto", "PM CE2 Line LED Auto"],
+    ["CE2 LED AUTO", "PM CE2 Line LED Auto"],
+    
+    ["MOPF1_ASSY", "PM LINE MOPF1"],
+    ["MOPF1_Ins", "PM CMM1 Line MOPF1"],
+    ["MOPF1_Isp", "PM CMM1 Line MOPF1"],
+    ["MOPF1_Inps", "PM CMM1 Line MOPF1"],
+    ["CMM1 MOPF1", "PM CMM1 Line MOPF1"],
+    
+    ["MOPF2_ASSY", "PM LINE MOPF2"],
+    ["MOPF2_Ins", "PM CMM1 Line MOPF2"],
+    ["MOPF2_Inps", "PM CMM1 Line MOPF2"],
+    ["CMM1 MOPF2", "PM CMM1 Line MOPF2"],
+    
+    ["SCA3_ASSY", "PM LINE SCA3(ASSY PROCESS)"],
+    ["SCA3_Ins", "PM CMM1 Line SCA3"],
+    ["SCA3_Isp", "PM CMM1 Line SCA3"],
+    ["CMM1 SCA3", "PM CMM1 Line SCA3"],
+    
+    ["ECU", "PM CE1 Line ECU"],
+    ["CE1 ECU", "PM CE1 Line ECU"],
+    
+    ["BCM1", "PM CE1 LINE BCM1"],
+    ["CE1 BCM1", "PM CE1 LINE BCM1"],
+    
+    ["BCM2", "PM CE1 Line BCM2"],
+    ["CE1 BCM2", "PM CE1 Line BCM2"],
+    
+    ["TCU", "PM CE1 LINE TCU"],
+    ["CE1 TCU", "PM CE1 LINE TCU"],
+    
+    ["CID1", "PM CMM2 Line CID1"],
+    ["CMM2 CID1", "PM CMM2 Line CID1"],
+    
+    ["CID2", "PM CMM2 Line CID2"],
+    ["CMM2 CID2", "PM CMM2 Line CID2"],
+    
+    ["CID3", "PM CMM2 Line CID3"],
+    ["CMM2 CID3", "PM CMM2 Line CID3"],
+    
+    ["BMW", "PM LINE BMW"],
+    ["CMM2 BMW", "PM CH2 LINE BMW"],
+    
+    ["R1LOW1", "PM LINE R1LOW1"],
+    ["R1LOW2", "PM LINE R1LOW2"],
+    ["R1LOW3", "PM LINE R1LOW3"],
+    ["R1L2", "PM LINE R1LOW2"],
+    ["R1L3", "PM LINE R1LOW3"],
+    
+    ["S-ASSY", "PM EPS ECU(S.ASSY)"],
+    ["EPS ECU_S.ASSY", "PM EPS ECU(S.ASSY)"],
+    
+    ["C-PCB", "PM CE1 Line EPS-ECU(C.PCB)"],
+    ["C.PCB", "PM CE1 Line EPS-ECU(C.PCB)"]
+  ]
+}

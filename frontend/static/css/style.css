@@ -1,0 +1,1665 @@
+/* Elin AI - Premium Desktop Edition */
+
+/* ฟอนต์ Prompt (ใช้ path สัมพันธ์ เพื่อให้ผ่าน Nginx proxy /ai-static/ ได้) */
+@font-face {
+    font-family: 'Prompt';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/Prompt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Prompt';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/Prompt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Prompt';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/Prompt-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Prompt';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../fonts/Prompt-Light.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color 0.32s ease, color 0.24s ease;
+}
+
+#sidebar,
+#send-btn,
+#user-input,
+.shortcut-btn,
+.msg-bot,
+.msg-user,
+.loading-bubble,
+.msg-bot-read-btn-external,
+.status-indicator {
+    transition:
+        background-color 0.24s ease,
+        border-color 0.24s ease,
+        color 0.24s ease,
+        box-shadow 0.28s ease,
+        transform 0.24s ease,
+        opacity 0.24s ease;
+}
+
+body.mode-transitioning #sidebar,
+body.mode-transitioning #send-btn,
+body.mode-transitioning #user-input,
+body.mode-transitioning .shortcut-btn,
+body.mode-transitioning .msg-bot,
+body.mode-transitioning .msg-user,
+body.mode-transitioning .loading-bubble {
+    transition-duration: 0.34s;
+}
+
+#send-btn {
+    overflow: hidden;
+    will-change: box-shadow, background-color;
+}
+
+.send-btn-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, opacity;
+    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+
+#send-btn:hover .send-btn-icon-wrap--send {
+    transform: translate3d(1px, -1px, 0);
+}
+
+#send-btn:active .send-btn-icon-wrap {
+    transform: scale(0.92);
+}
+
+.send-btn-stop-square {
+    display: block;
+    width: 0.82rem;
+    height: 0.82rem;
+    background: #09090b;
+    border-radius: 0.16rem;
+    box-shadow: inset 0 0 0 1px rgba(24, 24, 27, 0.08);
+    animation: stop-square-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.send-btn--cancel {
+    cursor: pointer !important;
+}
+
+.send-btn--busy .send-btn-icon-wrap {
+    transform: scale(0.94) rotate(90deg);
+}
+
+.chat-ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.chat-ambient-blob {
+    position: absolute;
+    display: block;
+    border-radius: 9999px;
+    opacity: 0.18;
+    filter: blur(34px);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+}
+
+.chat-ambient-blob--primary {
+    width: 28rem;
+    height: 28rem;
+    top: -7rem;
+    right: -6rem;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, rgba(244, 114, 182, 0) 72%);
+    animation: ambient-float 20s ease-in-out infinite alternate;
+}
+
+.chat-ambient-blob--secondary {
+    width: 24rem;
+    height: 24rem;
+    bottom: 8%;
+    left: -5rem;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.14) 0%, rgba(168, 85, 247, 0) 70%);
+    animation: ambient-float-alt 24s ease-in-out infinite alternate;
+}
+
+.chat-ambient-blob--accent {
+    width: 18rem;
+    height: 18rem;
+    top: 42%;
+    right: 18%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0) 72%);
+    animation: ambient-float-reverse 22s ease-in-out infinite alternate;
+}
+
+body.bg-slate-950 .chat-ambient-blob--primary {
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.24) 0%, rgba(96, 165, 250, 0) 72%);
+}
+
+body.bg-slate-950 .chat-ambient-blob--secondary {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0) 72%);
+}
+
+body.bg-slate-950 .chat-ambient-blob--accent {
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0) 72%);
+}
+
+/* ให้แชทเลื่อนลงจนสุด (flex child ต้องมี min-height: 0 เพื่อให้ overflow-y-auto ทำงานถูกต้อง) */
+/* ----------------------------------
+   🎨 Global Scrollbar (ธีมม่วง/ชมพู)
+---------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(24, 24, 27, 0.5); /* zinc-900 transparent */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3f3f46; /* zinc-700 */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #52525b; /* zinc-600 */
+}
+
+/* ----------------------------------
+   🎨 Animations & Loaders
+---------------------------------- */
+.triangle-loader {
+    width: 40px;
+    height: calc(40px * 0.866);
+    background: #ec4899;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    --c: at 50% 66%, #000 60deg, #0000 0;
+    -webkit-mask:
+      conic-gradient(from 30deg var(--c)) right,
+      conic-gradient(from 150deg var(--c)) bottom,
+      conic-gradient(from -90deg var(--c)) left,
+      linear-gradient(#000 0 0);
+    mask:
+      conic-gradient(from 30deg var(--c)) right,
+      conic-gradient(from 150deg var(--c)) bottom,
+      conic-gradient(from -90deg var(--c)) left,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: triangle-appear 1.5s infinite;
+    filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.3));
+}
+
+.triangle-loader--meta {
+    background: #3b82f6;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.35));
+}
+
+.loading-bubble {
+    width: min(360px, calc(100vw - 7rem));
+    padding: 1rem 1.05rem 0.95rem;
+    border-radius: 1.15rem;
+    border: 1px solid rgba(236, 72, 153, 0.22);
+    background: linear-gradient(180deg, rgba(24, 24, 27, 0.96), rgba(17, 24, 39, 0.94));
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.loading-bubble--meta {
+    border-color: rgba(59, 130, 246, 0.28);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(10, 18, 34, 0.94));
+    box-shadow: 0 12px 28px rgba(30, 64, 175, 0.18);
+}
+
+.loading-avatar-shell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-avatar-core {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-avatar-aura {
+    position: absolute;
+    inset: -18%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.28) 0%, rgba(244, 114, 182, 0) 72%);
+    opacity: 0.5;
+    transform: scale(0.82);
+    animation: avatar-aura-breathe 3.1s ease-in-out infinite;
+}
+
+.loading-avatar-shell--meta .loading-avatar-aura {
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.34) 0%, rgba(96, 165, 250, 0) 72%);
+    opacity: 0.62;
+}
+
+.loading-progress-line {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    top: 0;
+    height: 2px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(244, 114, 182, 0.12);
+}
+
+.loading-progress-bar {
+    display: block;
+    width: 38%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(236, 72, 153, 0), rgba(244, 114, 182, 0.95), rgba(251, 207, 232, 0));
+    transform: translateX(-140%);
+    will-change: transform;
+    animation: loading-progress-sweep 2.6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+.loading-bubble--meta .loading-progress-line {
+    background: rgba(96, 165, 250, 0.14);
+}
+
+.loading-bubble--meta .loading-progress-bar {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0), rgba(96, 165, 250, 0.92), rgba(191, 219, 254, 0));
+}
+
+.loading-bubble::before {
+    content: "";
+    position: absolute;
+    inset: -32% -22%;
+    pointer-events: none;
+    background: linear-gradient(115deg, rgba(244, 114, 182, 0) 34%, rgba(244, 114, 182, 0.11) 48%, rgba(251, 207, 232, 0.18) 53%, rgba(244, 114, 182, 0) 68%);
+    transform: translate3d(-35%, 0, 0);
+    animation: loading-stream-glow 4.4s linear infinite;
+}
+
+.loading-bubble--meta::before {
+    background: linear-gradient(115deg, rgba(96, 165, 250, 0) 34%, rgba(96, 165, 250, 0.12) 48%, rgba(191, 219, 254, 0.18) 53%, rgba(96, 165, 250, 0) 68%);
+}
+
+.loading-bubble::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 48%);
+}
+
+.loading-bubble--meta::after {
+    background: radial-gradient(circle at top right, rgba(147, 197, 253, 0.16), transparent 48%);
+}
+
+.loading-stage-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 0.95rem;
+    position: relative;
+    z-index: 1;
+    padding-top: 0.18rem;
+}
+
+.loading-stage-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-width: 7rem;
+    min-height: 1.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    background: rgba(236, 72, 153, 0.1);
+    color: #f9a8d4;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.loading-bubble--meta .loading-stage-badge {
+    border-color: rgba(59, 130, 246, 0.24);
+    background: rgba(59, 130, 246, 0.12);
+    color: #93c5fd;
+}
+
+.loading-stage-title {
+    color: #f4f4f5;
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.loading-stage-detail {
+    color: #d4d4d8;
+    font-size: 0.86rem;
+    line-height: 1.65;
+    min-height: 3em;
+}
+
+.loading-typing-pulse {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    margin: -0.1rem 0 0.45rem;
+    min-height: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.loading-typing-pulse .typing-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(244, 114, 182, 0.86);
+    transform-origin: center;
+    animation: typing-pulse 1.18s ease-in-out infinite;
+}
+
+.loading-typing-pulse .typing-dot:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+.loading-typing-pulse .typing-dot:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+.loading-bubble--meta .loading-typing-pulse .typing-dot {
+    background: rgba(96, 165, 250, 0.88);
+}
+
+.loading-stage-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.15rem;
+    position: relative;
+    z-index: 1;
+}
+
+.loading-bubble--stage-shift::after {
+    animation: loading-stage-glow 0.52s ease-out;
+}
+
+.loading-bubble--stage-shift .loading-stage-badge,
+.loading-bubble--stage-shift .loading-stage-title,
+.loading-bubble--stage-shift .loading-stage-detail {
+    animation: loading-stage-swap 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes triangle-appear {
+  0% {
+    -webkit-mask-size: 0 0, 0 0, 0 0, auto;
+  }
+  13.33% {
+    -webkit-mask-size: 100% 100%, 0 0, 0 0, auto;
+  }
+  26.67% {
+    -webkit-mask-size: 100% 100%, 100% 100%, 0 0, auto;
+  }
+  40%,
+  60% {
+    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, auto;
+  }
+  73.33% {
+    -webkit-mask-size: 0 0, 100% 100%, 100% 100%, auto;
+  }
+  86.67% {
+    -webkit-mask-size: 0 0, 0 0, 100% 100%, auto;
+  }
+  100% {
+    -webkit-mask-size: 0 0, 0 0, 0 0, auto;
+  }
+}
+
+@keyframes stop-square-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.56);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes ambient-float {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(-2.5rem, 2rem, 0) scale(1.08);
+    }
+}
+
+@keyframes ambient-float-alt {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(3rem, -1.5rem, 0) scale(1.06);
+    }
+}
+
+@keyframes ambient-float-reverse {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(-1.5rem, -2.2rem, 0) scale(1.1);
+    }
+}
+
+@keyframes avatar-aura-breathe {
+    0%,
+    100% {
+        opacity: 0.42;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.72;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes loading-stream-glow {
+    from {
+        transform: translate3d(-36%, 0, 0);
+    }
+
+    to {
+        transform: translate3d(36%, 0, 0);
+    }
+}
+
+@keyframes loading-progress-sweep {
+    from {
+        transform: translateX(-140%);
+    }
+
+    to {
+        transform: translateX(320%);
+    }
+}
+
+@keyframes loading-stage-glow {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes loading-stage-swap {
+    from {
+        opacity: 0.3;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes typing-pulse {
+    0%,
+    80%,
+    100% {
+        opacity: 0.35;
+        transform: translateY(0) scale(0.82);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(-1px) scale(1.08);
+    }
+}
+
+@keyframes suggestion-chip-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes suggestion-sheen {
+    from {
+        transform: translate3d(-120%, 0, 0);
+    }
+
+    to {
+        transform: translate3d(120%, 0, 0);
+    }
+}
+
+@keyframes table-panel-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes table-content-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes chart-overlay-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes chart-modal-pop {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes chart-surface-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* ----------------------------------
+   🎨 Layout Styles
+---------------------------------- */
+
+#chat-container {
+    min-height: 0;
+}
+
+/* ----------------------------------
+   🎨 Chat Bubbles (กล่องข้อความ)
+---------------------------------- */
+.msg-bot {
+    background: rgba(39, 39, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    padding: 8px 12px;
+    border-radius: 4px 20px 20px 20px;
+    color: #e4e4e7;
+    line-height: 1.4;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* เพิ่ม spacing สำหรับ <br> tags - ใช้ margin-bottom แบบ flexible */
+.msg-bot br {
+    display: block;
+    content: "";
+    margin-bottom: 0.1em;
+    /* ลดให้น้อยมาก */
+}
+
+/* เพิ่ม spacing สำหรับ paragraphs */
+.msg-bot p {
+    margin-bottom: 0.5em;
+    /* ลดให้ชิดกว่าเดิม */
+    line-height: 1.4;
+}
+
+.msg-bot p:last-child {
+    margin-bottom: 0;
+}
+
+.bot-response-text {
+    margin-bottom: 0.65rem;
+    line-height: 1.55;
+}
+
+.bot-response-text:last-child {
+    margin-bottom: 0;
+}
+
+/* จัดระเบียบปุ่มต่างๆ ให้เป็นระเบียบ */
+.msg-bot-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.msg-bot-actions--primary {
+    margin-top: 0.75rem;
+}
+
+.msg-bot-actions--secondary {
+    margin-top: 0.75rem;
+    padding-top: 0.55rem;
+}
+
+.msg-bot-actions button {
+    flex-shrink: 0;
+    min-height: 26px;
+    /* ลดให้เล็กลง */
+    font-size: 0.7rem;
+    /* ลดขนาดตัวอักษร */
+    padding: 0.25rem 0.5rem;
+    /* ลด padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(39, 39, 42, 1);
+    /* zinc-800 */
+    border: 1px solid rgba(82, 82, 91, 1);
+    /* zinc-600 */
+    color: rgba(212, 212, 216, 1);
+    /* zinc-300 */
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.msg-bot-actions button:hover {
+    background: rgba(63, 63, 70, 1);
+    /* zinc-700 */
+    color: white;
+}
+
+.msg-bot-chart-btn {
+    border-color: rgba(236, 72, 153, 0.35) !important;
+    color: #f9a8d4 !important;
+}
+
+.msg-bot-chart-btn:hover {
+    background: rgba(190, 24, 93, 0.35) !important;
+    border-color: rgba(244, 114, 182, 0.6) !important;
+    color: #ffffff !important;
+}
+
+/* ลบ padding-right ออกจากกล่องข้อความเพราะปุ่ม TTS ย้ายออกไปแล้ว */
+.msg-bot {
+    padding-right: 16px !important; /* คืนค่า padding ปกติ */
+}
+
+/* ลบการปรับ content area เพราะไม่จำเป็นแล้ว */
+.msg-bot .bot-response-text,
+.msg-bot .msg-content {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important; /* ให้ใช้พื้นที่เต็ม */
+}
+
+/* สไตล์สำหรับปุ่ม TTS ใหม่ที่อยู่ข้างนอกกล่องข้อความ */
+.msg-content--streaming .response-fragment {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate3d(0, 10px, 0);
+    will-change: opacity, transform, filter;
+    animation: response-fragment-in 0.96s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--response-fragment-index, 0) * 240ms);
+}
+
+.msg-content--streaming .response-fragment--text {
+    clip-path: inset(0 100% 0 0 round 12px);
+    will-change: opacity, transform, filter, clip-path;
+    transform-origin: left center;
+    animation-name: response-fragment-text-in;
+    animation-duration: 1.44s;
+}
+
+.msg-content--streaming .response-fragment--inline {
+    display: block;
+}
+
+.response-fragment--support {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.985);
+    animation: response-fragment-support-in 0.76s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--response-fragment-index, 0) * 240ms);
+}
+
+.msg-bot-read-btn-external {
+    position: relative !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(236, 72, 153, 0.1) !important; /* สีชมพูโหมดปกติ */
+    border: 2px solid rgba(236, 72, 153, 0.3) !important;
+    color: #ec4899 !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+    z-index: 20 !important;
+    padding: 0 !important;
+    gap: 1px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    margin-left: 8px !important; /* เว้นระยะจากกล่องข้อความ */
+    margin-top: 4px !important; /* เว้นระยะจากด้านบน */
+    align-self: flex-start !important; /* จัดให้อยู่ด้านบน */
+    flex-shrink: 0 !important; /* ไม่ให้หดตัว */
+}
+
+.msg-bot-read-btn-external:hover {
+    background: rgba(236, 72, 153, 0.2) !important;
+    border-color: #ec4899 !important;
+    color: #ffffff !important;
+    transform: scale(1.1);
+}
+
+
+.msg-bot-read-btn-external.is-speaking {
+    background: #ec4899 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.6) !important;
+}
+
+/* สไตล์สำหรับ Meta Mode (สีน้ำเงิน) */
+.meta-mode .msg-bot-read-btn-external {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    color: #3b82f6 !important;
+}
+
+.meta-mode .msg-bot-read-btn-external:hover {
+    background: rgba(59, 130, 246, 0.2) !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+}
+
+.meta-mode .msg-bot-read-btn-external.is-speaking {
+    background: #3b82f6 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6) !important;
+}
+
+/* ปรับสไตล์ speaker waves สำหรับปุ่มใหม่ */
+.msg-bot-read-btn-external .speaker-waves {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 2px;
+}
+
+.msg-bot-read-btn-external.is-speaking .speaker-waves {
+    display: flex;
+}
+
+.msg-bot-read-btn-external .wave {
+    width: 2px;
+    height: 8px;
+    background: #f9a8d4; /* สีชมพูอ่อนโหมดปกติ */
+    animation: wave-animation 1s ease-in-out infinite;
+}
+
+.msg-bot-read-btn-external .wave:nth-child(2) { animation-delay: 0.2s; }
+.msg-bot-read-btn-external .wave:nth-child(3) { animation-delay: 0.4s; }
+
+/* สี wave สำหรับ Meta Mode */
+.meta-mode .msg-bot-read-btn-external .wave {
+    background: #93c5fd; /* สีน้ำเงินอ่อน */
+}
+
+/* ลบสไตล์เก่าของปุ่ม TTS ที่อยู่ในกล่องข้อความ */
+.wave:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wave-animation {
+    0%, 100% { height: 4px; }
+    50% { height: 12px; }
+}
+
+.msg-user {
+    background: linear-gradient(135deg, #ec4899, #be185d);
+    padding: 10px 16px;
+    border-radius: 20px 4px 20px 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    margin-left: auto;
+    line-height: 1.5;
+    max-width: 75%;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+/* ปุ่มในข้อความ Elin ให้แสดงชัดและไม่ถูกตัด */
+.msg-bot .msg-bot-actions {
+    min-width: 0;
+}
+
+.msg-bot .msg-bot-actions button,
+.msg-bot button {
+    flex-shrink: 0;
+    min-height: 26px;
+}
+
+.msg-bot details {
+    margin-top: 0.65rem;
+}
+
+.msg-bot-debug {
+    margin-top: 0.8rem !important;
+}
+
+.suggestion-btn {
+    position: relative;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+    transform: translate3d(0, 0, 0);
+    animation: suggestion-chip-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--suggestion-index, 0) * 28ms);
+}
+
+.suggestion-btn::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+    transform: translate3d(-120%, 0, 0);
+    transition: opacity 0.2s ease;
+}
+
+.suggestion-btn:hover {
+    transform: translate3d(0, -2px, 0) scale(1.02);
+    box-shadow: 0 10px 18px rgba(236, 72, 153, 0.14);
+}
+
+.suggestion-btn:hover::after {
+    opacity: 1;
+    animation: suggestion-sheen 0.7s ease;
+}
+
+body.bg-slate-950 .suggestion-btn:hover {
+    box-shadow: 0 10px 18px rgba(59, 130, 246, 0.16);
+}
+
+.table-panel {
+    transform-origin: top center;
+}
+
+.table-panel--visible .table-wrapper {
+    animation: table-panel-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.table-panel--visible .data-table {
+    animation: table-content-in 0.42s ease both;
+}
+
+/* ----------------------------------
+   📊 Premium Data Tables (ธีมเดียวกับแชท + scrollbar)
+---------------------------------- */
+.table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 70vh;
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(236, 72, 153, 0.25);
+    background: #18181b;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    margin-top: 10px;
+    margin-bottom: 8px;
+    /* scrollbar ธีมเดียวกับแชท (ใช้ class custom-scrollbar ใน JS) */
+}
+
+
+table.data-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    table-layout: fixed;
+}
+
+table.data-table th,
+table.data-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #27272a;
+    vertical-align: top;
+}
+
+table.data-table th {
+    background-color: #0f0f11;
+    font-weight: 600;
+    color: #f472b6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+table.data-table td {
+    color: #d4d4d8;
+    transition: background-color 0.2s ease;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 280px;
+}
+
+table.data-table tr:hover td {
+    background-color: #27272a;
+}
+
+table.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ----------------------------------
+   ✨ เอฟเฟกต์ & แอนิเมชัน
+---------------------------------- */
+.animate-msg {
+    animation: message-reveal 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+.animate-msg--bot {
+    transform-origin: left bottom;
+}
+
+.animate-msg--user {
+    transform-origin: right bottom;
+}
+
+@keyframes message-reveal {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes response-fragment-in {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translate3d(0, 10px, 0);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes response-fragment-text-in {
+    from {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translate3d(0, 12px, 0);
+        clip-path: inset(0 100% 0 0 round 12px);
+    }
+
+    55% {
+        opacity: 0.92;
+        filter: blur(3px);
+        clip-path: inset(0 18% 0 0 round 12px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0);
+        clip-path: inset(0 0 0 0 round 12px);
+    }
+}
+
+@keyframes response-fragment-support-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+.glow-focus:focus {
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.15);
+}
+
+.shortcut-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #3f3f46;
+    /* สีเติมทั้งสี่เหลี่ยม (zinc-700) โทนเดิม */
+    border: 1px solid #52525b;
+    color: #d4d4d8;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shortcut-btn:hover {
+    background: #52525b;
+    /* สีเข้มขึ้นตอนชี้ (zinc-600) */
+    border-color: #71717a;
+    color: white;
+    transform: translateX(4px);
+    /* เลื่อนขวานิดนึงตอนชี้ */
+}
+
+/* สัญลักษณ์แถบสีหน้าข้อความ ตามสีเดิมของแต่ละปุ่ม */
+@media (prefers-reduced-motion: reduce) {
+    .animate-msg,
+    .chat-ambient-blob,
+    .triangle-loader,
+    .loading-bubble::before,
+    .loading-progress-bar,
+    .loading-bubble::after,
+    .loading-avatar-aura,
+    .loading-typing-pulse .typing-dot,
+    .loading-bubble--stage-shift .loading-stage-badge,
+    .loading-bubble--stage-shift .loading-stage-title,
+    .loading-bubble--stage-shift .loading-stage-detail,
+    .msg-content--streaming .response-fragment,
+    .response-fragment--support,
+    .send-btn-icon-wrap,
+    .suggestion-btn,
+    .suggestion-btn::after,
+    .table-panel--visible .table-wrapper,
+    .table-panel--visible .data-table,
+    .shortcut-btn,
+    .msg-bot-read-btn-external,
+    #chart-modal.chart-modal--visible,
+    #chart-modal.chart-modal--visible .modal-box,
+    #chart-modal.chart-modal--visible #chart-options,
+    #dataChart.chart-surface--visible,
+    #sidebar,
+    #send-btn,
+    #user-input,
+    .msg-bot,
+    .msg-user,
+    .loading-bubble {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.shortcut-btn--pink {
+    border-left: 4px solid #f472b6;
+}
+
+/* pink-400 */
+.shortcut-btn--blue {
+    border-left: 4px solid #60a5fa;
+}
+
+/* blue-400 */
+.shortcut-btn--emerald {
+    border-left: 4px solid #34d399;
+}
+
+/* emerald-400 */
+.shortcut-btn--yellow {
+    border-left: 4px solid #facc15;
+}
+
+/* yellow-400 */
+.shortcut-btn--green {
+    border-left: 4px solid #4ade80;
+}
+
+/* green-400 */
+
+/* ----------------------------------
+   🖱️ Scrollbar (สวยเนียนตา)
+---------------------------------- */
+
+/* ----------------------------------
+   📋 Modal Popups (คู่มือ, Line status, Tech Status) — ธีมเดียวกับแชท + scrollbar
+---------------------------------- */
+.modal-box {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(236, 72, 153, 0.08);
+}
+
+.modal-header {
+    flex-shrink: 0;
+}
+
+.modal-body {
+    flex-shrink: 1;
+}
+
+.modal-close {
+    transition: color 0.2s, background-color 0.2s;
+}
+
+#chart-modal.chart-modal--visible {
+    animation: chart-overlay-in 0.2s ease-out both;
+}
+
+#chart-modal.chart-modal--visible .modal-box {
+    animation: chart-modal-pop 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#chart-modal.chart-modal--visible #chart-options {
+    animation: table-content-in 0.28s ease-out both;
+}
+
+#dataChart {
+    will-change: transform, opacity;
+}
+
+#dataChart.chart-surface--visible {
+    animation: chart-surface-in 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* scrollbar ใน modal ให้จับง่าย ธีมเดียวกับแชท */
+
+/* Animation จุดเวลาพิมพ์ ของเดิม - ไม่ใช้แล้ว */
+.typing-dot {
+    animation: typing 1.4s infinite ease-in-out both;
+    background-color: #ec4899;
+}
+
+.typing-dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typing {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* ----------------------------------
+   🔐 Login Modal Styles (Blue Theme)
+---------------------------------- */
+.login-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.login-container span {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 6px;
+    background: #1e3a5f;
+    border-radius: 80px;
+    transform-origin: 300px;
+    transform: rotate(calc(var(--i) * (360deg / 50)));
+    animation: blink 3s linear infinite;
+    animation-delay: calc(var(--i) * (3s / 50));
+    z-index: 1;
+}
+
+@keyframes blink {
+    0% {
+        background: #3b82f6;
+    }
+
+    25% {
+        background: #1e3a5f;
+    }
+}
+
+.login-box {
+    position: absolute;
+    width: 80%;
+    max-width: 320px;
+    z-index: 10;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.login-box form {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.login-box h2 {
+    font-size: 1.8em;
+    color: #3b82f6;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 11;
+}
+
+.login-box .input-box {
+    position: relative;
+    margin: 25px 0;
+    z-index: 11;
+}
+
+.login-box input {
+    width: 100%;
+    height: 45px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 2px solid #1e3a5f;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 15px;
+    transition: 0.5s ease;
+    position: relative;
+    z-index: 11;
+}
+
+.login-box input:focus {
+    border-color: #3b82f6;
+    background: rgba(30, 41, 59, 1);
+}
+
+/* Label จะอยู่ด้านบนตลอดเมื่อมีค่าหรือ focus */
+.login-box input:not(:placeholder-shown)~label,
+.login-box input:focus~label {
+    top: -10px;
+    font-size: 0.8em;
+    background: #0f172a;
+    padding: 0 6px;
+    color: #3b82f6;
+}
+
+.login-box label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    pointer-events: none;
+    transition: 0.5s ease;
+    color: #94a3b8;
+    z-index: 11;
+}
+
+.login-box .btn {
+    width: 100%;
+    height: 45px;
+    background: #3b82f6;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #0f172a;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-top: 25px;
+    position: relative;
+    z-index: 11;
+}
+
+.login-box .btn:hover {
+    background: #2563eb;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.login-back-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid #1e3a5f;
+    border-radius: 25px;
+    color: #94a3b8;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 60;
+}
+
+.login-back-btn:hover {
+    background: rgba(30, 41, 59, 1);
+    border-color: #3b82f6;
+    color: #3b82f6;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Animation for notification */
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+}
+
+
+/* ----------------------------------
+   🔷 Meta Mode Styles
+---------------------------------- */
+body.bg-slate-950 .msg-user {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    /* ไล่สีน้ำเงิน */
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+body.bg-slate-950 .msg-bot {
+    border-color: rgba(59, 130, 246, 0.3);
+    /* ขอบสีน้ำเงินจางๆ */
+}
+
+body.bg-slate-950 .msg-bot-chart-btn {
+    border-color: rgba(59, 130, 246, 0.35) !important;
+    color: #93c5fd !important;
+}
+
+body.bg-slate-950 .msg-bot-chart-btn:hover {
+    background: rgba(30, 64, 175, 0.35) !important;
+    border-color: rgba(96, 165, 250, 0.6) !important;
+    color: #ffffff !important;
+}
+
+body.bg-slate-950 .table-wrapper {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+body.bg-slate-950 table.data-table th {
+    color: #60a5fa;
+}
+
+body.bg-slate-950 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}
+
+/* ----------------------------------
+   🎵 Background Music Button
+---------------------------------- */
+.music-btn {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    width: 28px;
+    height: 28px;
+    background: rgba(24, 24, 27, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.music-btn:hover {
+    background: rgba(39, 39, 42, 0.9);
+    border-color: rgba(236, 72, 153, 0.5);
+    transform: scale(1.1);
+}
+
+.music-btn i {
+    font-size: 14px;
+}
+
+.music-btn--playing {
+    border-color: rgba(236, 72, 153, 0.6);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+    animation: music-pulse 2s infinite;
+}
+
+@keyframes music-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(236, 72, 153, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+    }
+}
+
+.music-sticker {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 10px;
+    filter: drop-shadow(0 0 2px rgba(236, 72, 153, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.music-btn--playing .music-sticker {
+    transform: scale(1.2) rotate(15deg);
+    animation: sticker-wiggle 1s infinite alternate;
+}
+
+@keyframes sticker-wiggle {
+    from {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    to {
+        transform: scale(1.3) rotate(25deg);
+    }
+}
+
+/* ----------------------------------
+   🌓 Sidebar Toggle Styles
+---------------------------------- */
+#sidebar {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#sidebar.sidebar-collapsed {
+    width: 84px !important;
+}
+
+#sidebar.sidebar-collapsed .sidebar-text {
+    display: none !important;
+}
+
+#sidebar.sidebar-collapsed .sidebar-header {
+    padding: 1.5rem 0.5rem !important;
+    justify-content: center !important;
+}
+
+#sidebar.sidebar-collapsed .shortcut-btn {
+    padding: 10px 0 !important;
+    justify-content: center !important;
+    border-left-width: 0 !important;
+    position: relative;
+    overflow: hidden;
+}
+
+#sidebar.sidebar-collapsed .shortcut-btn i {
+    font-size: 1.4rem !important;
+}
+
+#sidebar.sidebar-collapsed .shortcut-btn--pink::after,
+#sidebar.sidebar-collapsed .shortcut-btn--blue::after,
+#sidebar.sidebar-collapsed .shortcut-btn--emerald::after,
+#sidebar.sidebar-collapsed .shortcut-btn--yellow::after,
+#sidebar.sidebar-collapsed .shortcut-btn--green::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    border-radius: 0 4px 4px 0;
+}
+
+#sidebar.sidebar-collapsed .shortcut-btn--pink::after { background: #f472b6; }
+#sidebar.sidebar-collapsed .shortcut-btn--blue::after { background: #60a5fa; }
+#sidebar.sidebar-collapsed .shortcut-btn--emerald::after { background: #34d399; }
+#sidebar.sidebar-collapsed .shortcut-btn--yellow::after { background: #facc15; }
+#sidebar.sidebar-collapsed .shortcut-btn--green::after { background: #4ade80; }
+
+#sidebar-toggle {
+    transition: all 0.3s ease;
+}
+
+#sidebar-toggle div {
+    transition: all 0.3s ease;
+}
+
+/* Animation when sidebar is collapsed - hamburger to X */
+#sidebar.sidebar-collapsed #sidebar-toggle div:nth-child(1) {
+    transform: rotate(45deg) translate(1px, 1px);
+    width: 0.5rem;
+}
+
+#sidebar.sidebar-collapsed #sidebar-toggle div:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#sidebar.sidebar-collapsed #sidebar-toggle div:nth-child(3) {
+    transform: rotate(-45deg) translate(1px, -1px);
+    width: 0.5rem;
+}
+
+/* Meta mode styling for sidebar toggle */
+body.bg-slate-950 #sidebar-toggle {
+    background: rgba(59, 130, 246, 0.8) !important;
+}
+
+body.bg-slate-950 #sidebar-toggle:hover {
+    background: rgba(37, 99, 235, 0.9) !important;
+}
+
+body.bg-slate-950 #sidebar-toggle div {
+    background: #e2e8f0 !important;
+}
+
+#sidebar h2 {
+    transition: all 0.3s;
+}
+
+#sidebar.sidebar-collapsed h2 {
+    justify-content: center !important;
+    margin-bottom: 0.5rem !important;
+}

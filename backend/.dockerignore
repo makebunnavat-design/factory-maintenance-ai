@@ -1,0 +1,46 @@
+# Ignore unnecessary files for Docker build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+.coverage
+.env
+.venv
+env/
+venv/
+
+# Ignore large model files (use volume mounts instead)
+models/
+*.bin
+*.safetensors
+*.onnx
+*.onnx_data
+
+# Ignore data files (use volume mounts)
+data/*.db
+data/*.jsonl
+data/*.json
+
+# Ignore vector indexes (use volume mounts)
+vector_index/
+
+# Ignore logs
+*.log
+logs/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore backup files
+*.backup
+*.bak

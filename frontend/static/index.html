@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>น้อง Elin AI 💖 - Desktop Edition</title>
+    <script>
+        (function () { var w = console.warn; console.warn = function (m) { if (typeof m === 'string' && m.indexOf('cdn.tailwindcss.com') !== -1) return; w.apply(console, arguments); }; })();
+    </script>
+    <script src="/static/js/tailwindcss.js?v=__STATIC_VERSION__"></script>
+    <script src="/static/js/chart.umd.min.js?v=__STATIC_VERSION__"></script>
+    <!-- ดูกราฟ ใช้ echarts.min.js (โหลดจากเครื่อง) -->
+    <script src="/static/js/echarts.min.js?v=__STATIC_VERSION__"></script>
+    <link rel="stylesheet" href="/static/css/style.css?v=__STATIC_VERSION__">
+    <link rel="stylesheet" href="/static/css/phosphor-regular.css?v=__STATIC_VERSION__">
+    <script src="api/avatar-base64.js?v=__STATIC_VERSION__"></script>
+</head>
+
+<body class="h-screen flex bg-zinc-950 text-zinc-200 overflow-hidden selection:bg-pink-500/30">
+
+    <aside id="sidebar"
+        class="w-72 bg-zinc-900/60 border-r border-zinc-800/80 backdrop-blur-xl flex flex-col h-full hidden md:flex z-20 transition-all duration-300 relative">
+        <button id="sidebar-toggle" onclick="toggleSidebar()" class="absolute right-2 top-2 w-4 h-3 bg-pink-600/80 backdrop-blur-sm rounded flex flex-col items-center justify-center gap-0.5 text-white shadow-md z-30 hover:bg-pink-500/90 transition-all group">
+            <div class="w-2 h-0.5 bg-white rounded transition-transform group-hover:w-2.5"></div>
+            <div class="w-1.5 h-0.5 bg-white rounded transition-transform group-hover:w-2.5"></div>
+            <div class="w-2 h-0.5 bg-white rounded transition-transform group-hover:w-2.5"></div>
+        </button>
+        <div class="p-6 border-b border-zinc-800/80 flex items-center gap-4 sidebar-header">
+            <div
+                class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800 shadow-[0_0_15px_rgba(236,72,153,0.3)] border border-pink-500/50 flex-shrink-0">
+                <img data-elin-avatar src="" alt="Elin"
+                    class="w-full h-full object-cover hover:scale-110 transition duration-300">
+            </div>
+            <div class="flex-1 min-w-0 sidebar-text">
+                <h1 class="text-xl font-semibold text-white tracking-wide">Elin <span class="text-pink-500">CMM&amp;CE
+                        engineer</span></h1>
+                <p class="text-xs text-white flex items-center gap-1.5">ระบบผู้ช่วยซ่อมบำรุง <span
+                        class="status-indicator text-pink-400" title="พร้อมใช้งาน">💖</span></p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 space-y-6 custom-scrollbar">
+            <div>
+                <h2 class="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-circles-four"></i> <span class="sidebar-text">โหมด</span>
+                </h2>
+                <div class="flex flex-col gap-2">
+                    <button id="mode-toggle-btn" onclick="toggleMode()" class="shortcut-btn shortcut-btn--pink">
+                        <i id="mode-toggle-icon" class="ph-fill ph-robot text-pink-400"></i> <span
+                            id="mode-toggle-text" class="sidebar-text">โหมดปกติ</span>
+                    </button>
+                    <button id="teach-Elin-btn" onclick="openTeachModal()"
+                        class="shortcut-btn shortcut-btn--blue hidden">
+                        <i class="ph-fill ph-graduation-cap text-blue-400"></i> <span class="sidebar-text">สอน Elin</span>
+                    </button>
+                    <button id="update-meta-btn" onclick="updateMetaEmbeddings()"
+                        class="shortcut-btn shortcut-btn--emerald hidden">
+                        <i class="ph-fill ph-arrows-clockwise text-emerald-400"></i> <span class="sidebar-text">Update</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-lightning"></i> <span class="sidebar-text">คำสั่งด่วน</span>
+                </h2>
+                <div class="flex flex-col gap-2">
+                    <button type="button"
+                        onclick="document.getElementById('user-input').value='วันนี้มีเครื่องเสียอะไรบ้าง'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));"
+                        class="shortcut-btn shortcut-btn--pink">
+                        <i class="ph-fill ph-warning-circle text-pink-400"></i> <span class="sidebar-text">สรุปเครื่องเสียวันนี้</span>
+                    </button>
+                    <button type="button"
+                        onclick="document.getElementById('user-input').value='เมื่อวานกะดึกมีอะไรเสียบ้าง'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));"
+                        class="shortcut-btn shortcut-btn--pink">
+                        <i class="ph-fill ph-moon text-pink-400"></i> <span class="sidebar-text">เมื่อวานกะดึกมีอะไรเสียบ้าง</span>
+                    </button>
+                    <button type="button"
+                        onclick="document.getElementById('user-input').value='แผน PM เดือนนี้'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));"
+                        class="shortcut-btn shortcut-btn--blue">
+                        <i class="ph-fill ph-calendar-check text-blue-400"></i> <span class="sidebar-text">แผน PM เดือนนี้</span>
+                    </button>
+                    <button type="button"
+                        onclick="document.getElementById('user-input').value='ขอประวัติการซ่อมของ ISPU'; document.getElementById('chat-form').dispatchEvent(new Event('submit'));"
+                        class="shortcut-btn shortcut-btn--emerald">
+                        <i class="ph-fill ph-clock-counter-clockwise text-emerald-400"></i> <span class="sidebar-text">ขอประวัติการซ่อมของ ISPU</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-export"></i> <span class="sidebar-text">เครื่องมือ</span>
+                </h2>
+                <div class="flex flex-col gap-2">
+                    <button type="button" onclick="openHelpGuide()" class="shortcut-btn shortcut-btn--yellow">
+                        <i class="ph-fill ph-book-open text-yellow-400"></i> <span class="sidebar-text">คู่มือ</span>
+                    </button>
+                    <button type="button" onclick="reloadData()" class="shortcut-btn shortcut-btn--green">
+                        <i class="ph-fill ph-arrow-clockwise text-green-400"></i> <span class="sidebar-text">Reload</span>
+                    </button>
+                    <button type="button" onclick="toggleDashboard()" class="shortcut-btn shortcut-btn--pink">
+                        <i class="ph-fill ph-chart-line-up text-pink-400"></i> <span class="sidebar-text">Line status</span>
+                    </button>
+                    <button type="button" onclick="openTechStatus()" class="shortcut-btn shortcut-btn--blue">
+                        <i class="ph-fill ph-users-three text-blue-400"></i> <span class="sidebar-text">Tech Status</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full relative min-w-0 overflow-hidden">
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black opacity-90 z-0 pointer-events-none">
+        </div>
+        <div class="chat-ambient pointer-events-none" aria-hidden="true">
+            <span class="chat-ambient-blob chat-ambient-blob--primary"></span>
+            <span class="chat-ambient-blob chat-ambient-blob--secondary"></span>
+            <span class="chat-ambient-blob chat-ambient-blob--accent"></span>
+        </div>
+
+        <div id="chat-container"
+            class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-6 md:p-10 z-10 custom-scrollbar flex flex-col gap-6 scroll-smooth">
+            <div class="flex items-start gap-3 animate-msg">
+                <div class="w-10 h-10 rounded-full overflow-hidden bg-zinc-800 border border-zinc-700 shadow-md flex-shrink-0">
+                    <img data-elin-avatar src="" alt="Elin" class="w-full h-full object-cover">
+                </div>
+                <div class="flex flex-col max-w-[90%]">
+                    <div class="msg-bot p-4">
+                        <div class="msg-content">
+                        สวัสดีค่ะ วันนี้ให้หนู Elin "อีลิน" ช่วยลุยงานซ่อมบำรุงนะคะ 🛠️<br>
+                        • ค้นหาประวัติการซ่อม<br>
+                        • ตรวจสอบเครื่องที่เสียบ่อย<br>
+                        • เช็กแผน PM ของเครื่องจักร<br>
+                        แค่พิมพ์ชื่อ เครื่องจักร, Process, Line หรือชื่อพี่ๆ ช่าง พร้อมช่วงเวลา<br>
+                        เช่น วันนี้ / เมื่อวาน / เดือนก่อน หนูก็จัดการค้นให้ได้เลยค่ะ<br>
+                        📌 ทริคเล็กๆ จากหนู<br>
+                        ปกติหนูจะสรุปข้อมูลให้ดูก่อน 10 รายการนะคะ ถ้าพี่ๆ อยากดูเพิ่ม พิมพ์บอกได้เลย เช่น "ขอ 20
+                        รายการ" <br>
+                        📋 อย่าลืมกดปุ่ม "ดูรายละเอียดเป็นตาราง" จะช่วยให้ดูข้อมูลได้ครบและสบายตามากขึ้นค่ะ<br>
+                        ถ้ายังไม่แน่ใจว่าจะถามอะไรดี ลองกดปุ่ม 📖 "คู่มือ" ด้านบน เพื่อดูตัวอย่างคำถามยอดนิยมได้เลยนะคะ<br>
+                        พร้อมแล้วค่า! วันนี้อยากให้หนู Elin ช่วยค้นข้อมูลอะไรดีคะ?
+                        </div>
+                    </div>
+                </div>
+                <!-- ปุ่ม TTS อยู่ใกล้กล่องข้อความ -->
+                <button type="button" onclick="toggleReadAloud(this)" class="msg-bot-read-btn-external" title="อ่านให้ฟัง">
+                    🔊
+                    <div class="speaker-waves">
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="p-6 z-10 bg-gradient-to-t from-zinc-950 to-transparent flex-shrink-0">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-end mb-2">
+                    <div class="flex gap-2">
+                        <p id="suggestions-hint" class="text-[10px] text-zinc-500 hidden">คำที่ใช้ได้ทั้งการซ่อมและ PM =
+                            ไม่ใส่ป้าย</p>
+                    </div>
+                </div>
+                <div id="suggestions"
+                    class="flex flex-wrap gap-2 overflow-x-auto pb-3 mb-1 text-xs no-scrollbar hidden"></div>
+                <form id="chat-form" class="relative group">
+                    <input type="text" id="user-input"
+                        class="w-full bg-zinc-800/80 backdrop-blur-md text-white border border-zinc-700/50 rounded-2xl pl-5 pr-14 py-4 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/50 transition-all shadow-lg placeholder-zinc-500 glow-focus text-base"
+                        placeholder="พิมพ์คำถาม........................................................"
+                        autocomplete="off">
+                    <button type="submit"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-600 hover:bg-pink-500 text-white p-2.5 rounded-xl transition-all transform hover:scale-105 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)] disabled:opacity-50 disabled:cursor-not-allowed group-focus-within:bg-pink-500 flex items-center justify-center send-btn"
+                        id="send-btn">
+                        <span class="send-btn-icon-wrap send-btn-icon-wrap--send" aria-hidden="true">
+                            <i class="ph-bold ph-paper-plane-right text-lg"></i>
+                        </span>
+                    </button>
+                </form>
+                <div class="text-center mt-3 text-xs text-zinc-500">
+                    💡 กด <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 border border-zinc-700">↑</kbd>
+                    บนคีย์บอร์ดเพื่อเรียกคำถามล่าสุด
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="dashboard-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-box bg-zinc-900 border border-pink-500/30 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="modal-header p-4 border-b border-zinc-700 flex justify-between items-center bg-zinc-800/80">
+                <h3 class="font-bold text-lg text-pink-400">💛 สถานะ Line</h3>
+                <button type="button" onclick="toggleDashboard()"
+                    class="modal-close text-zinc-400 hover:text-white hover:bg-zinc-600 rounded-lg w-9 h-9 flex items-center justify-center text-xl transition">&times;</button>
+            </div>
+            <div class="modal-body p-6 overflow-y-auto overflow-x-hidden flex-1 min-h-0 custom-scrollbar bg-zinc-950">
+                <div id="machine-grid" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tech-status-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-box bg-zinc-900 border border-pink-500/30 rounded-xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="modal-header p-4 border-b border-zinc-700 flex justify-between items-center bg-zinc-800/80">
+                <h3 class="font-bold text-lg text-blue-400">💜 Tech Status</h3>
+                <button type="button" onclick="closeTechStatus()"
+                    class="modal-close text-zinc-400 hover:text-white hover:bg-zinc-600 rounded-lg w-9 h-9 flex items-center justify-center text-xl transition">&times;</button>
+            </div>
+            <div class="modal-body p-6 overflow-y-auto overflow-x-hidden flex-1 min-h-0 custom-scrollbar bg-zinc-950">
+                <div id="tech-status-content" class="space-y-6">
+                    <div class="text-center text-zinc-400">💙 กำลังโหลดข้อมูล...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chart-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+        <div
+            class="modal-box bg-zinc-900 border border-pink-500/30 rounded-xl shadow-2xl w-full max-w-6xl max-h-[92vh] overflow-hidden flex flex-col">
+            <div class="modal-header p-5 border-b border-zinc-700 flex justify-between items-center bg-zinc-800/80">
+                <h3 class="font-bold text-xl text-pink-400">💗 กราฟแสดงผล</h3>
+                <button type="button" onclick="closeChart()"
+                    class="modal-close text-zinc-400 hover:text-white hover:bg-zinc-600 rounded-lg w-9 h-9 flex items-center justify-center text-xl transition">&times;</button>
+            </div>
+            <div id="chart-options"
+                class="px-5 py-4 border-b border-zinc-700/80 bg-zinc-800/50 flex flex-wrap gap-4 items-center text-sm flex-shrink-0">
+                <!-- เลือก แกน X, ค่าตัวเลข, ประเภทกราฟ (เติมจาก JS) -->
+            </div>
+            <div class="p-8 bg-zinc-950 flex-1 flex items-center justify-center min-h-0 overflow-auto custom-scrollbar">
+                <div id="dataChart" class="w-full" style="height: 520px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="help-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-box bg-zinc-900 border border-pink-500/30 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="modal-header p-4 border-b border-zinc-700 flex justify-between items-center bg-zinc-800/80">
+                <h3 class="font-bold text-lg text-amber-400">📖 คู่มือการใช้งาน Elin AI</h3>
+                <button type="button" onclick="closeHelpGuide()"
+                    class="modal-close text-zinc-400 hover:text-white hover:bg-zinc-600 rounded-lg w-9 h-9 flex items-center justify-center text-xl transition">&times;</button>
+            </div>
+            <div class="modal-body p-6 overflow-y-auto overflow-x-hidden flex-1 min-h-0 custom-scrollbar bg-zinc-950">
+                <div id="help-content" class="space-y-6 text-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal (before Teach Elin) -->
+    <div id="login-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <!-- Error Notification -->
+        <div id="login-error-notification" class="hidden fixed top-4 right-4 z-[60] animate-slide-in">
+            <div
+                class="error-alert cursor-default flex items-center justify-between w-60 sm:w-72 h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                <div class="flex gap-2">
+                    <div class="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white text-[10px] sm:text-xs">Login Failed</p>
+                        <p class="text-gray-500 text-[10px] sm:text-xs">User หรือ Password ไม่ถูกต้อง</p>
+                    </div>
+                </div>
+                <button onclick="closeLoginError()"
+                    class="text-gray-600 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Back Button (Fixed to bottom-left of screen) -->
+        <button type="button" onclick="closeLoginModal()" class="login-back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            Back
+        </button>
+
+        <div class="login-container">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="input-box">
+                        <input id="login-user" placeholder=" " required type="text" autocomplete="username" />
+                        <label>User</label>
+                    </div>
+                    <div class="input-box">
+                        <input id="login-password" placeholder=" " required type="password"
+                            autocomplete="current-password" />
+                        <label>Password</label>
+                    </div>
+                    <button class="btn" type="submit">Login</button>
+                </form>
+            </div>
+            <span style="--i:0;"></span><span style="--i:1;"></span><span style="--i:2;"></span><span
+                style="--i:3;"></span><span style="--i:4;"></span><span style="--i:5;"></span><span
+                style="--i:6;"></span><span style="--i:7;"></span><span style="--i:8;"></span><span
+                style="--i:9;"></span><span style="--i:10;"></span><span style="--i:11;"></span><span
+                style="--i:12;"></span><span style="--i:13;"></span><span style="--i:14;"></span><span
+                style="--i:15;"></span><span style="--i:16;"></span><span style="--i:17;"></span><span
+                style="--i:18;"></span><span style="--i:19;"></span><span style="--i:20;"></span><span
+                style="--i:21;"></span><span style="--i:22;"></span><span style="--i:23;"></span><span
+                style="--i:24;"></span><span style="--i:25;"></span><span style="--i:26;"></span><span
+                style="--i:27;"></span><span style="--i:28;"></span><span style="--i:29;"></span><span
+                style="--i:30;"></span><span style="--i:31;"></span><span style="--i:32;"></span><span
+                style="--i:33;"></span><span style="--i:34;"></span><span style="--i:35;"></span><span
+                style="--i:36;"></span><span style="--i:37;"></span><span style="--i:38;"></span><span
+                style="--i:39;"></span><span style="--i:40;"></span><span style="--i:41;"></span><span
+                style="--i:42;"></span><span style="--i:43;"></span><span style="--i:44;"></span><span
+                style="--i:45;"></span><span style="--i:46;"></span><span style="--i:47;"></span><span
+                style="--i:48;"></span><span style="--i:49;"></span>
+        </div>
+    </div>
+
+    <!-- Teach Elin Modal -->
+    <div id="teach-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-box bg-slate-900 border border-blue-500/40 rounded-xl shadow-[0_0_30px_rgba(59,130,246,0.2)] w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="modal-header p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800/80">
+                <h3 class="font-bold text-lg text-blue-400 flex items-center gap-2"><i
+                        class="ph-bold ph-graduation-cap"></i> สอน Elin (Meta Knowledge)</h3>
+                <button type="button" onclick="closeTeachModal()"
+                    class="modal-close text-zinc-400 hover:text-white hover:bg-slate-700 rounded-lg w-9 h-9 flex items-center justify-center text-xl transition">&times;</button>
+            </div>
+            <form id="teach-form"
+                class="flex flex-col flex-1 min-h-0 p-6 space-y-4 overflow-y-auto custom-scrollbar bg-slate-950 text-slate-200">
+                <div>
+                    <label class="block text-sm font-medium text-slate-400 mb-1">Name (ชื่อคนสอน/อ้างอิง)</label>
+                    <input type="text" id="teach-name" required
+                        class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50"
+                        placeholder="เช่น ช่างสมชาย">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-400 mb-1">Topic (หัวข้อ/คำถาม)</label>
+                    <input type="text" id="teach-topic" required
+                        class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50"
+                        placeholder="หัวข้อความรู้ หรือ คำถามที่ต้องการให้ตอบ">
+                </div>
+                <div class="flex-1 min-h-[150px] flex flex-col">
+                    <label class="block text-sm font-medium text-slate-400 mb-1">Answer (คำตอบ/รายละเอียด)</label>
+                    <textarea id="teach-answer" required
+                        class="w-full flex-1 bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 resize-none"
+                        placeholder="รายละเอียดของความรู้ หรือ คำตอบที่ต้องการให้ Elin ตอบ..."></textarea>
+                </div>
+                <div class="pt-4 flex justify-end gap-3 border-t border-slate-800 mt-2">
+                    <button type="button" onclick="closeTeachModal()"
+                        class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors">ยกเลิก</button>
+                    <button type="submit"
+                        class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-all shadow-[0_0_15px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-check"></i> บันทึกความรู้
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop preload="none">
+        <source src="/static/Elin.mp3?v=__STATIC_VERSION__" type="audio/mpeg">
+    </audio>
+
+
+
+
+
+    <button id="music-toggle" onclick="toggleMusic()" class="music-btn" title="เปิดฮาฟฟฟฟ">
+        <div class="relative w-full h-full flex items-center justify-center">
+            <i class="ph ph-speaker-none text-zinc-500"></i>
+            <span class="music-sticker">✨</span>
+        </div>
+    </button>
+
+    <script src="/static/js/app.js?v=__STATIC_VERSION__" defer></script>
+    <script>
+        (function () {
+            var src = window.SOMR_AVATAR_IMG || '';
+            document.querySelectorAll('img[data-elin-avatar]').forEach(function (img) {
+                if (src) img.src = src; else { var d = document.createElement('div'); d.className = 'w-full h-full rounded-full bg-zinc-700 flex items-center justify-center text-pink-400 font-bold text-xl'; d.textContent = 'ส'; img.parentNode.replaceChild(d, img); }
+            });
+        })();
+    </script>
+</body>
+
+</html>

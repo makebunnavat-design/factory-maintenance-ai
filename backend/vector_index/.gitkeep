@@ -1,0 +1,5 @@
+# This directory stores FAISS index files
+# Files in this directory:
+# - faiss.index: Main FAISS index
+# - documents.json: Document metadata
+# - embeddings.npy: Document embeddings (optional backup)
