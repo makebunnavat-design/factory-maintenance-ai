@@ -33,24 +33,26 @@
 
   <text x="120" y="138" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="24" letter-spacing="4">PROJECT SHOWCASE</text>
   <text x="120" y="210" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="700">Elin</text>
-  <text x="120" y="268" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="32">Offline AI assistant for factory maintenance and technical support</text>
+  <text x="120" y="268" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="30">
+    <tspan x="120" dy="0">Offline AI assistant for factory maintenance</tspan>
+    <tspan x="120" dy="38">and technical support</tspan>
+  </text>
 
-  <text x="120" y="340" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Core stack</text>
+  <text x="120" y="362" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Core stack</text>
   <g>
-    <rect x="120" y="370" width="182" height="50" rx="25" fill="#12324B"/>
-    <text x="149" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FastAPI</text>
-    <rect x="316" y="370" width="176" height="50" rx="25" fill="#12324B"/>
-    <text x="352" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Ollama</text>
-    <rect x="506" y="370" width="160" height="50" rx="25" fill="#12324B"/>
-    <text x="550" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">SQLite</text>
-    <rect x="680" y="370" width="146" height="50" rx="25" fill="#12324B"/>
-    <text x="724" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FAISS</text>
+    <rect x="120" y="392" width="182" height="50" rx="25" fill="#12324B"/>
+    <text x="149" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FastAPI</text>
+    <rect x="316" y="392" width="176" height="50" rx="25" fill="#12324B"/>
+    <text x="352" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Ollama</text>
+    <rect x="506" y="392" width="160" height="50" rx="25" fill="#12324B"/>
+    <text x="550" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">SQLite</text>
+    <rect x="680" y="392" width="146" height="50" rx="25" fill="#12324B"/>
+    <text x="724" y="424" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FAISS</text>
   </g>
 
-  <text x="120" y="475" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Highlights</text>
-  <text x="120" y="522" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• Custom orchestration with multi-pipeline routing</text>
-  <text x="120" y="560" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• SQL analytics + vector retrieval + hybrid reasoning</text>
-  <text x="120" y="598" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• Built for air-gapped industrial LAN environments</text>
+  <text x="120" y="497" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Highlights</text>
+  <text x="120" y="544" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- Custom orchestration with multi-pipeline routing</text>
+  <text x="120" y="582" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- SQL analytics + vector retrieval + hybrid reasoning</text>
 
   <rect x="792" y="146" width="338" height="392" rx="28" fill="#0A1724" stroke="#24465F"/>
   <rect x="820" y="182" width="158" height="34" rx="17" fill="#173652"/>
@@ -61,11 +63,20 @@
   <rect x="820" y="292" width="282" height="54" rx="16" fill="url(#accent)" fill-opacity="0.18" stroke="#4B7FA9"/>
   <text x="846" y="326" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Entity Resolve</text>
 
-  <rect x="820" y="362" width="282" height="54" rx="16" fill="#13283D" stroke="#2A4D6D"/>
-  <text x="846" y="396" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Router selects SQL / Vector / Hybrid</text>
+  <rect x="820" y="362" width="282" height="72" rx="16" fill="#13283D" stroke="#2A4D6D"/>
+  <text x="846" y="390" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    <tspan x="846" dy="0">Router selects</tspan>
+    <tspan x="846" dy="24">SQL / Vector / Hybrid</tspan>
+  </text>
 
-  <rect x="820" y="432" width="282" height="54" rx="16" fill="#13283D" stroke="#2A4D6D"/>
-  <text x="846" y="466" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Analytics + Retrieval + Summary</text>
+  <rect x="820" y="450" width="282" height="72" rx="16" fill="#13283D" stroke="#2A4D6D"/>
+  <text x="846" y="478" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    <tspan x="846" dy="0">Analytics + Retrieval</tspan>
+    <tspan x="846" dy="24">+ Summary</tspan>
+  </text>
 
-  <text x="820" y="566" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">Thai / English • Offline • Portfolio-ready</text>
+  <text x="820" y="566" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">
+    <tspan x="820" dy="0">Thai / English  |  Offline</tspan>
+    <tspan x="820" dy="24">Portfolio-ready showcase</tspan>
+  </text>
 </svg>
