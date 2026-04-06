@@ -61,30 +61,70 @@
                             <span></span>
                             <span></span>
                         </div>
-                        <div class="browser-body">
-                            <div class="mock-sidebar">
-                                <div class="mock-chip active">Repair Mode</div>
-                                <div class="mock-chip">Meta Mode</div>
-                                <div class="mock-chip">Async Job</div>
-                            </div>
-                            <div class="mock-chat">
-                                <div class="mock-bubble mock-bubble-user">
-                                    วันนี้ Line ไหนเสียบ่อยและสาเหตุคืออะไร
-                                </div>
-                                <div class="mock-loading-card">
-                                    <div class="loading-badge">Hybrid Route</div>
-                                    <div class="loading-title">กำลังวิเคราะห์หลายแหล่งข้อมูล</div>
-                                    <div class="loading-steps">
-                                        <span>Entity Match</span>
-                                        <span>SQL Analytics</span>
-                                        <span>Vector Evidence</span>
-                                        <span>Summary</span>
+                        <div class="browser-body browser-body--showcase">
+                            <aside class="mock-sidebar mock-sidebar--app">
+                                <div class="mock-profile-card">
+                                    <div class="mock-profile-avatar">E</div>
+                                    <div class="mock-profile-copy">
+                                        <strong>Elin CMM&amp;CE engineer</strong>
+                                        <span>ระบบผู้ช่วยซ่อมบำรุงในโรงงาน</span>
                                     </div>
                                 </div>
-                                <div class="mock-bubble mock-bubble-bot">
-                                    วันนี้ระบบเลือก hybrid pipeline เพื่อดูทั้งจำนวน breakdown และ root cause จาก repair logs
+
+                                <div class="mock-sidebar-group">
+                                    <div class="mock-sidebar-title">โหมด</div>
+                                    <div class="mock-chip active">โหมดปกติ</div>
+                                    <div class="mock-chip">Meta Mode</div>
                                 </div>
-                            </div>
+
+                                <div class="mock-sidebar-group">
+                                    <div class="mock-sidebar-title">คำสั่งลัด</div>
+                                    <div class="mock-chip mock-chip--accent-pink">สรุปเครื่องเสียวันนี้</div>
+                                    <div class="mock-chip mock-chip--accent-cyan">แผน PM เดือนนี้</div>
+                                    <div class="mock-chip mock-chip--accent-yellow">คู่มือ</div>
+                                    <div class="mock-chip mock-chip--accent-blue">Tech Status</div>
+                                </div>
+                            </aside>
+
+                            <section class="mock-app-canvas">
+                                <div class="mock-chat-view">
+                                    <div class="mock-thread-row">
+                                        <div class="mock-thread-avatar">E</div>
+                                        <div class="mock-thread-card mock-thread-card--welcome">
+                                            <div class="mock-thread-title">สวัสดีค่ะ วันนี้ให้ Elin ช่วยอะไรดีคะ</div>
+                                            <div class="mock-thread-text">
+                                                ค้นหาประวัติการซ่อม ตรวจสอบเครื่องที่เสียบ่อย เช็กแผน PM ของเครื่องจักร
+                                                และช่วยวิเคราะห์จาก Process, Line, ชื่อช่าง หรือช่วงเวลาได้ในหน้าจอเดียว
+                                            </div>
+                                        </div>
+                                        <div class="mock-thread-audio">🔊</div>
+                                    </div>
+
+                                    <div class="mock-thread-row">
+                                        <div class="mock-thread-avatar mock-thread-avatar--meta">M</div>
+                                        <div class="mock-thread-card mock-thread-card--meta">
+                                            <div class="mock-thread-label">Project Showcase</div>
+                                            <div class="mock-thread-title">กำลังวิเคราะห์หลายแหล่งข้อมูลแบบ Hybrid</div>
+                                            <div class="loading-steps">
+                                                <span>Entity Match</span>
+                                                <span>SQL Analytics</span>
+                                                <span>Vector Evidence</span>
+                                                <span>Summary</span>
+                                            </div>
+                                            <div class="mock-thread-text">
+                                                ตัวอย่างนี้สื่อให้เห็นว่า Elin ไม่ได้ตอบแบบ chatbot ทั่วไป
+                                                แต่เลือก pipeline ตามชนิดคำถามและสรุปผลให้คนหน้างานอ่านง่าย
+                                            </div>
+                                        </div>
+                                        <div class="mock-thread-audio">🔊</div>
+                                    </div>
+                                </div>
+
+                                <div class="mock-composer">
+                                    <span class="mock-composer-placeholder">พิมพ์คำถามเกี่ยวกับ Line, Process, PM หรือสาเหตุการเสีย...</span>
+                                    <span class="mock-composer-send"></span>
+                                </div>
+                            </section>
                         </div>
                     </div>
 
