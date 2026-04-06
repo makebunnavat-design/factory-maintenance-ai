@@ -1,111 +1,129 @@
 # Elin
 
-Offline AI assistant for factory maintenance and technical support.
+> Offline AI assistant for factory maintenance, repair analytics, and technical support.
 
-Elin is a FastAPI-based assistant designed for air-gapped industrial environments. It combines local LLM inference, SQL analytics, vector retrieval, and hybrid reasoning to answer maintenance questions in Thai and English without relying on external APIs.
+<p align="left">
+  <img src="https://img.shields.io/badge/Deployment-Offline%20LAN-0b7285?style=for-the-badge" alt="Offline LAN">
+  <img src="https://img.shields.io/badge/Backend-FastAPI-0f766e?style=for-the-badge" alt="FastAPI">
+  <img src="https://img.shields.io/badge/LLM-Ollama%20(Local)-1d4ed8?style=for-the-badge" alt="Ollama">
+  <img src="https://img.shields.io/badge/Retrieval-FAISS%20%2B%20BGE-7c3aed?style=for-the-badge" alt="FAISS and BGE">
+  <img src="https://img.shields.io/badge/Data-SQLite-92400e?style=for-the-badge" alt="SQLite">
+  <img src="https://img.shields.io/badge/UI-Thai%20%2F%20English-475569?style=for-the-badge" alt="Thai and English">
+</p>
 
-## Why This Project Exists
+![Elin repository preview](docs/assets/elin-repo-preview.svg)
 
-Manufacturing teams often have large amounts of repair history, PM data, and operational knowledge, but the data is fragmented across databases, logs, and human know-how.
+## Project Summary
 
-Elin was built to make that information usable through a single interface that can:
+Elin is a custom-built AI assistant designed for industrial maintenance teams working in air-gapped environments.  
+It combines local LLM inference, SQL analytics, vector retrieval, and hybrid reasoning to answer operational questions in Thai and English without relying on external APIs.
 
-- answer conversational questions
-- query maintenance and PM data from local databases
-- retrieve similar repair cases and knowledge snippets
-- combine structured facts with semantic evidence
+This project is positioned as:
 
-## Portfolio Showcase
+- an offline-first industrial AI system
+- a multi-pipeline maintenance assistant
+- a practical example of custom orchestration over local models
+- a portfolio-ready case study in AI systems design
 
-This repository includes a portfolio-friendly static showcase page in [`portfolio/`](portfolio/README.md).
+## Why This Project Stands Out
 
-- Open [`portfolio/index.html`](portfolio/index.html) locally to view the mockup
-- Use the `portfolio/` folder as a lightweight landing page for GitHub Pages or demos
+Most chatbot projects stop at conversation. Elin goes further by deciding how a question should be answered:
 
-## Core Capabilities
+- `CHAT` for conversational assistance
+- `SQL` for factual repair / PM analytics
+- `VECTOR` for similar repair-case retrieval
+- `HYBRID` for analytics plus explanation
+- `META` for curated internal knowledge mode
 
-- Offline-first deployment inside a factory LAN
-- Local LLM inference via Ollama
-- SQL generation and execution for repair and PM analytics
-- Vector search over repair logs and knowledge content
-- Hybrid pipeline that combines analytics with evidence retrieval
-- Async chat flow for better UI responsiveness
-- Guardrails for domain filtering and safer SQL execution
+That makes the project closer to a small AI operating layer for maintenance teams than a generic assistant.
 
-## Tech Stack
+## Key Highlights
+
+| Area | What Elin Demonstrates |
+| --- | --- |
+| AI architecture | Custom orchestration with router-driven pipeline selection |
+| Practical deployment | Works in offline factory LAN environments |
+| Data reasoning | Uses generated SQL with guardrails for structured answers |
+| Retrieval | Uses FAISS, embeddings, reranking, and context compression |
+| UX thinking | Async request flow, loading stages, chart/table rendering, TTS |
+| Domain fit | Designed around maintenance, PM, line names, process names, and repair logs |
+
+## Stack
 
 | Layer | Technology | Purpose |
 | --- | --- | --- |
-| API backend | Python, FastAPI | Main application and orchestration |
-| LLM runtime | Ollama | Local inference for chat, routing, and SQL generation |
-| Chat / router models | Local Llama / Typhoon family | Conversation and routing decisions |
-| SQL generation | Qwen Coder via Ollama | Natural language to SQL |
-| Databases | SQLite | Repair work DB and PM DB |
-| Retrieval | FAISS | Local vector search |
-| Embeddings | BGE-M3 | Semantic retrieval and entity matching |
-| Reranking | BGE Reranker Large | Improves retrieval quality |
-| Frontend | HTML, CSS, vanilla JavaScript | Operator-facing chat UI |
+| API backend | Python, FastAPI | Request handling and orchestration |
+| LLM runtime | Ollama | Local inference for chat, router, and SQL generation |
+| SQL generation | Qwen Coder | Natural language to SQL |
+| Chat / router models | Local Llama / Typhoon family | Chat behavior and routing decisions |
+| Databases | SQLite | Repair and PM data storage |
+| Retrieval | FAISS | Local semantic search |
+| Embeddings | BGE-M3 | Retrieval and entity matching |
+| Reranking | BGE Reranker Large | Search quality improvement |
+| Frontend | HTML, CSS, vanilla JavaScript | Chat interface and presentation |
 | Deployment | Docker Compose | Local service orchestration |
 
-## How Elin Works
-
-At a high level, each request goes through a custom orchestrator:
-
-1. Validate the request and ensure local data is ready
-2. Resolve entities such as line, process, or technician names
-3. Apply guardrails for out-of-domain or sensitive requests
-4. Route the message into the best pipeline
-5. Execute the selected pipeline
-6. Format the response for chat, table, or chart output
-
-Supported pipelines:
-
-- `CHAT`: conversational answers
-- `SQL`: structured answers from repair / PM databases
-- `VECTOR`: semantic retrieval from repair logs or knowledge text
-- `HYBRID`: analytics first, retrieval second
-- `META`: knowledge mode for curated internal content
-
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the detailed flow.
-
-## Project Structure
+## Architecture Snapshot
 
 ```text
-repair-chatbot/
-|-- backend/
-|   |-- main.py
-|   |-- core/
-|   |-- pipelines/
-|   |-- services/
-|   |-- utils/
-|   |-- scripts/
-|   `-- config/
-|-- frontend/
-|   `-- static/
-|-- portfolio/
-|-- docker-compose.yml
-|-- .gitignore
-`-- README.md
+User / Browser
+  -> Frontend Chat UI
+  -> FastAPI Backend
+     -> Data Readiness
+     -> Guardrails
+     -> Entity Resolution
+     -> Unified Router
+        -> CHAT
+        -> SQL
+        -> VECTOR
+        -> HYBRID
+        -> META
+     -> Response Formatting
+     -> Frontend Render
 ```
+
+For the full breakdown, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+## Portfolio / Demo Layer
+
+This repository includes a portfolio-friendly static showcase page in [`portfolio/`](portfolio/README.md).
+
+- Open [`portfolio/index.html`](portfolio/index.html) locally for the mockup/showcase
+- Use `portfolio/` as a lightweight presentation layer for GitHub Pages or project demos
+
+## What The User Experience Looks Like
+
+- user asks a question in Thai or English
+- backend resolves line / process / technician entities
+- router selects the correct pipeline
+- system queries SQL, retrieves similar cases, or combines both
+- frontend renders the answer as chat, table, or chart
+
+This is especially useful for questions like:
+
+- "วันนี้มีอะไรเสียบ้าง"
+- "เดือนนี้ Line ไหนเสียบ่อยที่สุด"
+- "ปัญหานี้มีสาเหตุจากอะไร"
+- "มีเคสคล้ายกันที่เคยซ่อมไว้ไหม"
 
 ## Important Source Areas
 
-- [`backend/main.py`](backend/main.py): main FastAPI app and request orchestration
-- [`backend/pipelines/llm_router.py`](backend/pipelines/llm_router.py): unified router for pipeline and database selection
-- [`backend/pipelines/sql_generator.py`](backend/pipelines/sql_generator.py): SQL prompt building and SQL generation flow
-- [`backend/pipelines/vector_pipeline.py`](backend/pipelines/vector_pipeline.py): vector retrieval and synthesis
-- [`backend/pipelines/hybrid_pipeline.py`](backend/pipelines/hybrid_pipeline.py): hybrid analytics + retrieval reasoning
-- [`backend/services/entity_matching.py`](backend/services/entity_matching.py): entity matching for line/process resolution
-- [`frontend/static/js/app.js`](frontend/static/js/app.js): chat UI behavior, async flow, loading state, charts, and TTS
+- [`backend/main.py`](backend/main.py): main FastAPI app and orchestration flow
+- [`backend/pipelines/llm_router.py`](backend/pipelines/llm_router.py): routing and override rules
+- [`backend/pipelines/sql_generator.py`](backend/pipelines/sql_generator.py): SQL prompt building and generation
+- [`backend/pipelines/vector_pipeline.py`](backend/pipelines/vector_pipeline.py): vector retrieval pipeline
+- [`backend/pipelines/hybrid_pipeline.py`](backend/pipelines/hybrid_pipeline.py): hybrid analytics + retrieval path
+- [`backend/services/entity_matching.py`](backend/services/entity_matching.py): entity resolution for factory terms
+- [`frontend/static/js/app.js`](frontend/static/js/app.js): frontend chat flow, async loading, rendering, and interaction
 
-## Running the Project
+## Running The Project
 
 Typical local flow:
 
-1. Prepare local models for Ollama
-2. Ensure the required factory databases are available in `backend/data/`
-3. Start services with Docker Compose
-4. Open the frontend in a browser on the factory LAN
+1. prepare local models for Ollama
+2. ensure required factory databases are available in `backend/data/`
+3. start services with Docker Compose
+4. open the frontend in a browser on the factory LAN
 
 Example:
 
@@ -113,11 +131,11 @@ Example:
 docker-compose up --build
 ```
 
-The exact runtime setup depends on your local environment, model availability, and factory data sources.
+The exact setup depends on local models, internal data availability, and deployment environment.
 
 ## Repo Hygiene
 
-This repository intentionally ignores heavy or environment-specific runtime artifacts such as:
+This repository intentionally ignores heavy or environment-specific artifacts such as:
 
 - local databases
 - logs and QA history
@@ -125,35 +143,35 @@ This repository intentionally ignores heavy or environment-specific runtime arti
 - generated vector indexes
 - cached audio output
 
-That keeps the Git history focused on source code, documentation, and reusable project assets.
+That keeps Git history focused on source code, reusable assets, and documentation.
 
-## Current Positioning
-
-Elin is best described as:
-
-- a custom-orchestrated AI assistant
-- a multi-pipeline maintenance support system
-- an offline industrial AI stack
-- a hybrid structured + retrieval application
-
-It is not a generic chatbot and not a framework-first agent project.
-
-## Limitations
+## Current Limitations
 
 - orchestration is still concentrated in `backend/main.py`
-- routing accuracy depends on domain rules plus LLM behavior
-- some hybrid reasoning is still heuristic-based
-- test coverage is limited
+- routing accuracy still depends on domain rules plus LLM behavior
+- some hybrid reasoning remains heuristic-based
+- automated test coverage is still limited
 
 ## Documentation
 
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): architecture overview and pipeline breakdown
-- [`portfolio/README.md`](portfolio/README.md): portfolio page notes
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): system architecture overview
+- [`docs/GITHUB_PROFILE_COPY.md`](docs/GITHUB_PROFILE_COPY.md): ready-to-use GitHub profile text
+- [`portfolio/README.md`](portfolio/README.md): notes for the portfolio showcase page
 
-## Suggested Next Step
+## Why This Repo Is Useful In A Hiring Context
 
-If you want to present this project professionally on GitHub:
+This project shows more than UI polish or single-model prompting. It demonstrates:
 
-- keep this repo as the engineering source
-- use the `portfolio/` folder as the public-facing showcase layer
-- add screenshots or a short demo GIF later for even stronger presentation
+- backend architecture thinking
+- AI workflow orchestration
+- retrieval and analytics integration
+- domain adaptation for industrial operations
+- product-minded UX decisions for operational tools
+
+If you are reviewing this project as a hiring manager or technical lead, the best place to start is:
+
+1. [`README.md`](README.md)
+2. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+3. [`portfolio/index.html`](portfolio/index.html)
+4. [`backend/main.py`](backend/main.py)
+

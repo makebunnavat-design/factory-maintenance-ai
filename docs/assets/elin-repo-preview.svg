@@ -1,0 +1,71 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="160" y1="84" x2="1106" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081521"/>
+      <stop offset="1" stop-color="#10263B"/>
+    </linearGradient>
+    <linearGradient id="card" x1="111" y1="145" x2="1096" y2="607" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142A42" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#0C1A29" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="237" y1="151" x2="820" y2="498" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67D4CC"/>
+      <stop offset="1" stop-color="#78AEF8"/>
+    </linearGradient>
+    <filter id="blurA" x="805" y="-50" width="445" height="445" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <filter id="blurB" x="-58" y="385" width="365" height="365" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" rx="36" fill="url(#bg)"/>
+
+  <g filter="url(#blurA)">
+    <circle cx="1027" cy="172" r="102" fill="#67D4CC" fill-opacity="0.28"/>
+  </g>
+  <g filter="url(#blurB)">
+    <circle cx="124" cy="568" r="62" fill="#F1A85B" fill-opacity="0.28"/>
+  </g>
+
+  <rect x="76" y="72" width="1128" height="576" rx="30" fill="url(#card)" stroke="#28445F"/>
+
+  <text x="120" y="138" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="24" letter-spacing="4">PROJECT SHOWCASE</text>
+  <text x="120" y="210" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="700">Elin</text>
+  <text x="120" y="268" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="32">Offline AI assistant for factory maintenance and technical support</text>
+
+  <text x="120" y="340" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Core stack</text>
+  <g>
+    <rect x="120" y="370" width="182" height="50" rx="25" fill="#12324B"/>
+    <text x="149" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FastAPI</text>
+    <rect x="316" y="370" width="176" height="50" rx="25" fill="#12324B"/>
+    <text x="352" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Ollama</text>
+    <rect x="506" y="370" width="160" height="50" rx="25" fill="#12324B"/>
+    <text x="550" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">SQLite</text>
+    <rect x="680" y="370" width="146" height="50" rx="25" fill="#12324B"/>
+    <text x="724" y="402" fill="#E9F7FF" font-family="Segoe UI, Arial, sans-serif" font-size="22">FAISS</text>
+  </g>
+
+  <text x="120" y="475" fill="#E4EFF8" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Highlights</text>
+  <text x="120" y="522" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• Custom orchestration with multi-pipeline routing</text>
+  <text x="120" y="560" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• SQL analytics + vector retrieval + hybrid reasoning</text>
+  <text x="120" y="598" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">• Built for air-gapped industrial LAN environments</text>
+
+  <rect x="792" y="146" width="338" height="392" rx="28" fill="#0A1724" stroke="#24465F"/>
+  <rect x="820" y="182" width="158" height="34" rx="17" fill="#173652"/>
+  <text x="853" y="205" fill="#D5EBF8" font-family="Segoe UI, Arial, sans-serif" font-size="17" letter-spacing="1.2">HYBRID ROUTE</text>
+
+  <text x="820" y="260" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">How it works</text>
+
+  <rect x="820" y="292" width="282" height="54" rx="16" fill="url(#accent)" fill-opacity="0.18" stroke="#4B7FA9"/>
+  <text x="846" y="326" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Entity Resolve</text>
+
+  <rect x="820" y="362" width="282" height="54" rx="16" fill="#13283D" stroke="#2A4D6D"/>
+  <text x="846" y="396" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Router selects SQL / Vector / Hybrid</text>
+
+  <rect x="820" y="432" width="282" height="54" rx="16" fill="#13283D" stroke="#2A4D6D"/>
+  <text x="846" y="466" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Analytics + Retrieval + Summary</text>
+
+  <text x="820" y="566" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">Thai / English • Offline • Portfolio-ready</text>
+</svg>
