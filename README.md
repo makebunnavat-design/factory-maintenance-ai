@@ -102,7 +102,7 @@ This repository includes a portfolio-friendly static showcase page in [`portfoli
 This is especially useful for questions like:
 
 - "วันนี้มีอะไรเสียบ้าง"
-- "เดือนนี้ Line ไหนเสียบ่อยที่สุด"
+- "เดือนนี้อันไหนเสียบ่อยที่สุด"
 - "ปัญหานี้มีสาเหตุจากอะไร"
 - "มีเคสคล้ายกันที่เคยซ่อมไว้ไหม"
 
