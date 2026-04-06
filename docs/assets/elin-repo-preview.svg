@@ -8,10 +8,6 @@
       <stop stop-color="#142A42" stop-opacity="0.96"/>
       <stop offset="1" stop-color="#0C1A29" stop-opacity="0.92"/>
     </linearGradient>
-    <linearGradient id="accent" x1="237" y1="151" x2="820" y2="498" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#67D4CC"/>
-      <stop offset="1" stop-color="#78AEF8"/>
-    </linearGradient>
     <filter id="blurA" x="805" y="-50" width="445" height="445" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feGaussianBlur stdDeviation="60"/>
     </filter>
@@ -55,32 +51,4 @@
   <text x="120" y="580" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- Custom orchestration with multi-pipeline routing</text>
   <text x="120" y="618" fill="#B6C7D8" font-family="Segoe UI, Arial, sans-serif" font-size="24">- SQL analytics + vector retrieval + hybrid reasoning</text>
 
-  <rect x="756" y="146" width="382" height="410" rx="28" fill="#0A1724" stroke="#24465F"/>
-  <rect x="786" y="182" width="178" height="34" rx="17" fill="#173652"/>
-  <text x="853" y="205" fill="#D5EBF8" font-family="Segoe UI, Arial, sans-serif" font-size="17" letter-spacing="1.2">HYBRID ROUTE</text>
-
-  <text x="786" y="260" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">How it works</text>
-
-  <rect x="786" y="292" width="322" height="54" rx="16" fill="url(#accent)" fill-opacity="0.18" stroke="#4B7FA9"/>
-  <text x="816" y="326" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="19">Entity Resolve</text>
-
-  <rect x="786" y="362" width="322" height="94" rx="16" fill="#13283D" stroke="#2A4D6D"/>
-  <text x="816" y="388" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="17">
-    <tspan x="816" dy="0">Router selects the best path:</tspan>
-    <tspan x="816" dy="24">SQL analytics,</tspan>
-    <tspan x="816" dy="24">Vector retrieval,</tspan>
-    <tspan x="816" dy="24">or Hybrid reasoning</tspan>
-  </text>
-
-  <rect x="786" y="472" width="322" height="84" rx="16" fill="#13283D" stroke="#2A4D6D"/>
-  <text x="816" y="498" fill="#F5FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="17">
-    <tspan x="816" dy="0">Analytics, retrieval,</tspan>
-    <tspan x="816" dy="24">response shaping,</tspan>
-    <tspan x="816" dy="24">and summary generation</tspan>
-  </text>
-
-  <text x="786" y="596" fill="#67D4CC" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600">
-    <tspan x="786" dy="0">Thai / English  |  Offline-ready</tspan>
-    <tspan x="786" dy="24">System showcase layout</tspan>
-  </text>
 </svg>
