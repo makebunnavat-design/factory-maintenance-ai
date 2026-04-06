@@ -114,6 +114,7 @@ a {
 .brand-lockup {
     display: grid;
     gap: 4px;
+    min-width: 0;
 }
 
 .brand-kicker {
@@ -377,7 +378,8 @@ a {
 
 .mock-profile-copy strong {
     font-size: 0.98rem;
-    line-height: 1.35;
+    line-height: 1.45;
+    margin-bottom: 4px;
 }
 
 .mock-profile-copy span {
@@ -488,6 +490,8 @@ a {
 .mock-thread-card {
     min-width: 0;
     max-width: 100%;
+    display: grid;
+    gap: 8px;
     padding: 14px 16px;
     border-radius: 18px;
     background: rgba(32, 34, 42, 0.96);
@@ -501,7 +505,7 @@ a {
 
 .mock-thread-label {
     display: inline-flex;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     padding: 6px 10px;
     border-radius: 999px;
     background: rgba(35, 89, 180, 0.22);
@@ -519,7 +523,7 @@ a {
 }
 
 .mock-thread-text {
-    margin-top: 8px;
+    margin-top: 0;
     color: #d2d8e0;
     font-size: 0.91rem;
     line-height: 1.75;
@@ -529,6 +533,7 @@ a {
 .mock-thread-audio {
     width: 36px;
     height: 36px;
+    padding: 0 6px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -536,7 +541,10 @@ a {
     background: rgba(86, 28, 66, 0.85);
     border: 1px solid rgba(243, 114, 182, 0.3);
     box-shadow: 0 0 0 3px rgba(242, 85, 164, 0.08);
-    font-size: 0.92rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .mock-chat {
@@ -602,7 +610,7 @@ a {
 .floating-metric {
     position: absolute;
     padding: 14px 16px;
-    max-width: 250px;
+    max-width: 226px;
     animation: float-card 8s ease-in-out infinite;
     overflow: hidden;
 }
@@ -629,8 +637,8 @@ a {
 .floating-metric strong {
     display: block;
     margin-top: 8px;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.88rem;
+    line-height: 1.55;
     overflow-wrap: anywhere;
     word-break: break-word;
 }
