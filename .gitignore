@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Local environments
+.venv/
+venv/
+.env
+.env.*
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Runtime / temp
+tmp/
+*.log
+failed_logs.txt
+
+# Backend generated assets
+backend/data/*.db
+backend/data/*.sqlite
+backend/data/*.jsonl
+backend/data/*.index
+backend/vector_index/*.index
+backend/vector_index/*.pkl
+backend/models/
+frontend/static/tts_cache/

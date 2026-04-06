@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elin Portfolio Showcase</title>
+    <meta name="description" content="Portfolio showcase for Elin, an offline AI assistant for factory maintenance and technical support.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
+        <header class="site-header">
+            <div class="brand-lockup">
+                <span class="brand-kicker">Portfolio Build</span>
+                <span class="brand-name">ELIN</span>
+            </div>
+            <nav class="site-nav">
+                <a href="#overview">Overview</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#story">Story</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero section" id="overview">
+                <div class="hero-copy reveal-on-scroll is-visible">
+                    <p class="eyebrow">Offline AI Assistant for Manufacturing Ops</p>
+                    <h1>Elin turns factory repair data into answers that feel fast, calm, and reliable.</h1>
+                    <p class="hero-text">
+                        โปรเจกต์นี้ออกแบบมาเพื่อช่วยงานซ่อมบำรุงและ technical support ในโรงงานแบบ 100% offline
+                        ด้วย FastAPI, Local LLM, SQL analytics, และ vector retrieval ที่ทำงานใน LAN ได้จริง
+                        โดยไม่พึ่ง API ภายนอกเลย
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#architecture">ดู Architecture</a>
+                        <a class="btn btn-secondary" href="#story">อ่าน Case Study</a>
+                    </div>
+                    <div class="hero-stats">
+                        <article class="stat-card">
+                            <strong>100%</strong>
+                            <span>Offline in Factory LAN</span>
+                        </article>
+                        <article class="stat-card">
+                            <strong>SQL + RAG</strong>
+                            <span>Structured and semantic reasoning</span>
+                        </article>
+                        <article class="stat-card">
+                            <strong>Thai/EN</strong>
+                            <span>Built for real maintenance operators</span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal-on-scroll">
+                    <div class="mock-browser">
+                        <div class="browser-topbar">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="browser-body">
+                            <div class="mock-sidebar">
+                                <div class="mock-chip active">Repair Mode</div>
+                                <div class="mock-chip">Meta Mode</div>
+                                <div class="mock-chip">Async Job</div>
+                            </div>
+                            <div class="mock-chat">
+                                <div class="mock-bubble mock-bubble-user">
+                                    วันนี้ Line ไหนเสียบ่อยและสาเหตุคืออะไร
+                                </div>
+                                <div class="mock-loading-card">
+                                    <div class="loading-badge">Hybrid Route</div>
+                                    <div class="loading-title">กำลังวิเคราะห์หลายแหล่งข้อมูล</div>
+                                    <div class="loading-steps">
+                                        <span>Entity Match</span>
+                                        <span>SQL Analytics</span>
+                                        <span>Vector Evidence</span>
+                                        <span>Summary</span>
+                                    </div>
+                                </div>
+                                <div class="mock-bubble mock-bubble-bot">
+                                    วันนี้ระบบเลือก hybrid pipeline เพื่อดูทั้งจำนวน breakdown และ root cause จาก repair logs
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-metric floating-metric-a">
+                        <span class="metric-label">Pipeline</span>
+                        <strong>CHAT / SQL / VECTOR / HYBRID / META</strong>
+                    </div>
+                    <div class="floating-metric floating-metric-b">
+                        <span class="metric-label">Stack</span>
+                        <strong>FastAPI + Ollama + SQLite + FAISS</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section">
+                <div class="panel reveal-on-scroll">
+                    <p class="eyebrow">What makes it portfolio-worthy</p>
+                    <h2>Not just a chatbot</h2>
+                    <p>
+                        Elin is positioned as a factory decision assistant. It does not only chat back, but decides
+                        when to answer conversationally, when to query repair history, when to retrieve similar repair cases,
+                        and when to combine both paths for hybrid reasoning.
+                    </p>
+                </div>
+                <div class="panel reveal-on-scroll">
+                    <p class="eyebrow">Professional angle</p>
+                    <h2>Built for constraints that matter</h2>
+                    <ul class="feature-list">
+                        <li>Runs inside an air-gapped LAN with zero API cost</li>
+                        <li>Supports Thai and English maintenance workflows</li>
+                        <li>Uses SQL safety rules before execution</li>
+                        <li>Separates structured analytics from knowledge retrieval</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section architecture-section" id="architecture">
+                <div class="section-heading reveal-on-scroll">
+                    <p class="eyebrow">Architecture Snapshot</p>
+                    <h2>Custom orchestration with multi-pipeline routing</h2>
+                </div>
+
+                <div class="diagram-card reveal-on-scroll">
+<pre class="diagram-block">User
+  -> FastAPI Orchestrator
+     -> Data Readiness / Guardrails / Entity Resolve
+     -> Unified Router
+        -> CHAT
+        -> SQL
+        -> VECTOR
+        -> HYBRID
+        -> META
+     -> Response Formatter + Logging
+  -> Frontend UI</pre>
+                </div>
+
+                <div class="architecture-grid">
+                    <article class="architecture-tile reveal-on-scroll">
+                        <span class="tile-index">01</span>
+                        <h3>Deterministic + LLM Router</h3>
+                        <p>เริ่มจาก entity signal และ domain rules ก่อน แล้วให้ LLM ช่วยเฉพาะส่วนที่กำกวมมากขึ้น</p>
+                    </article>
+                    <article class="architecture-tile reveal-on-scroll">
+                        <span class="tile-index">02</span>
+                        <h3>SQL Analytics Path</h3>
+                        <p>ดึงข้อเท็จจริงจาก repair/PM database ด้วย generated SQL ที่มี guardrails และ retry safety</p>
+                    </article>
+                    <article class="architecture-tile reveal-on-scroll">
+                        <span class="tile-index">03</span>
+                        <h3>Vector Knowledge Path</h3>
+                        <p>ค้นหา repair logs และ knowledge fragments ด้วย FAISS + embeddings + reranking</p>
+                    </article>
+                    <article class="architecture-tile reveal-on-scroll">
+                        <span class="tile-index">04</span>
+                        <h3>Hybrid Reasoning</h3>
+                        <p>ใช้ structured data หา top issue ก่อน แล้วเอาไปหาหลักฐานเชิงข้อความเพื่ออธิบายสาเหตุและแนวทางแก้</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section" id="highlights">
+                <div class="section-heading reveal-on-scroll">
+                    <p class="eyebrow">Project Highlights</p>
+                    <h2>What this portfolio page is trying to show</h2>
+                </div>
+                <div class="highlight-grid">
+                    <article class="highlight-card reveal-on-scroll">
+                        <h3>System Thinking</h3>
+                        <p>ไม่ได้โชว์แค่ UI แต่โชว์ว่าออกแบบ flow สำหรับ user ที่ต้องรอคำตอบจากหลาย pipeline ยังไง</p>
+                    </article>
+                    <article class="highlight-card reveal-on-scroll">
+                        <h3>Domain Fit</h3>
+                        <p>ตัวระบบไม่ generic แต่ tune ให้เข้ากับศัพท์ซ่อม, line ผลิต, PM task, และ query แบบหน้างานจริง</p>
+                    </article>
+                    <article class="highlight-card reveal-on-scroll">
+                        <h3>Offline Practicality</h3>
+                        <p>รองรับ local model, local DB, local vector index และ deployment ที่เหมาะกับโรงงานจริง</p>
+                    </article>
+                    <article class="highlight-card reveal-on-scroll">
+                        <h3>Portfolio Framing</h3>
+                        <p>หน้า showcase นี้ช่วยให้ repo ดูเป็น product case study มากกว่าการแปะ source code เปล่า ๆ</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section story-section" id="story">
+                <div class="section-heading reveal-on-scroll">
+                    <p class="eyebrow">Builder Story</p>
+                    <h2>How to talk about Elin in interviews or GitHub</h2>
+                </div>
+                <div class="story-timeline">
+                    <article class="story-step reveal-on-scroll">
+                        <span class="story-number">01</span>
+                        <div>
+                            <h3>The problem</h3>
+                            <p>โรงงานมีข้อมูลซ่อมเยอะ แต่ทีมใช้งานต้องการคำตอบที่สรุปไว ตรง และอธิบายเชิงสาเหตุได้</p>
+                        </div>
+                    </article>
+                    <article class="story-step reveal-on-scroll">
+                        <span class="story-number">02</span>
+                        <div>
+                            <h3>The approach</h3>
+                            <p>ออกแบบ custom orchestration ให้เลือกใช้ SQL, RAG, หรือ hybrid reasoning ตามลักษณะคำถาม</p>
+                        </div>
+                    </article>
+                    <article class="story-step reveal-on-scroll">
+                        <span class="story-number">03</span>
+                        <div>
+                            <h3>The engineering challenge</h3>
+                            <p>ต้องแม่นในศัพท์โรงงาน, ต้อง offline, ต้องปลอดภัยต่อฐานข้อมูล, และต้องตอบไวพอสำหรับคนหน้างาน</p>
+                        </div>
+                    </article>
+                    <article class="story-step reveal-on-scroll">
+                        <span class="story-number">04</span>
+                        <div>
+                            <h3>The portfolio angle</h3>
+                            <p>นี่คือโปรเจกต์ที่โชว์ทั้ง backend thinking, AI systems design, data workflow, และ UX สำหรับ operational tools</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer reveal-on-scroll">
+            <p>Designed as a portfolio-friendly landing page for the Elin project.</p>
+            <p class="footer-note">Suggested next step: publish this folder with GitHub Pages or keep it as a showcase folder inside the repo.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
