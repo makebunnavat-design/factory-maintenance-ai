@@ -1,8 +1,8 @@
-# Elin Architecture
+# Factory Maintenance AI System Architecture
 
 ## Overview
 
-Elin uses a custom orchestration layer rather than a framework-first agent architecture.
+This system uses a custom orchestration layer rather than a framework-first agent architecture.
 
 The system is centered around a FastAPI application that receives chat requests, resolves domain context, selects a pipeline, and returns a formatted result to the frontend.
 
@@ -127,7 +127,7 @@ Responsibilities:
 
 ## Data and Model Layer
 
-Elin uses local-only dependencies for industrial deployment:
+This system uses local-only dependencies for industrial deployment:
 
 - SQLite databases for repair and PM data
 - local Ollama-hosted models for chat and SQL generation
@@ -138,7 +138,7 @@ This keeps the stack compatible with air-gapped environments.
 
 ## Why This Architecture Matters
 
-Elin is designed around practical factory constraints:
+This system is designed around practical factory constraints:
 
 - no external API usage
 - low operational cost

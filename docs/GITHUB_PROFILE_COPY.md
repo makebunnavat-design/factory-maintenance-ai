@@ -12,7 +12,7 @@ Offline AI assistant for factory maintenance using FastAPI, Ollama, SQLite, FAIS
 
 ## Pinned Repository Caption
 
-Elin is an offline AI assistant for factory maintenance teams. It combines local LLMs, SQL analytics, and vector retrieval to answer operational questions inside an air-gapped LAN.
+This factory maintenance AI system combines local LLMs, SQL analytics, and vector retrieval to answer operational questions inside an air-gapped LAN.
 
 ## Short Pinned Text Options
 

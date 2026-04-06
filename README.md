@@ -1,4 +1,4 @@
-
+# Factory Maintenance AI System
 
 > Offline AI assistant for factory maintenance, repair analytics, and technical support.
 
@@ -15,7 +15,7 @@
 
 ## Project Summary
 
-Elin is a custom-built AI assistant designed for industrial maintenance teams working in air-gapped environments.  
+This project is a custom-built AI assistant designed for industrial maintenance teams working in air-gapped environments.  
 It combines local LLM inference, SQL analytics, vector retrieval, and hybrid reasoning to answer operational questions in Thai and English without relying on external APIs.
 
 This project is positioned as:
@@ -27,7 +27,7 @@ This project is positioned as:
 
 ## Why This Project Stands Out
 
-Most chatbot projects stop at conversation. Elin goes further by deciding how a question should be answered:
+Most chatbot projects stop at conversation. This system goes further by deciding how a question should be answered:
 
 - `CHAT` for conversational assistance
 - `SQL` for factual repair / PM analytics
@@ -39,7 +39,7 @@ That makes the project closer to a small AI operating layer for maintenance team
 
 ## Key Highlights
 
-| Area | What Elin Demonstrates |
+| Area | What This System Demonstrates |
 | --- | --- |
 | AI architecture | Custom orchestration with router-driven pipeline selection |
 | Practical deployment | Works in offline factory LAN environments |
