@@ -1,4 +1,4 @@
-# Elin
+
 
 > Offline AI assistant for factory maintenance, repair analytics, and technical support.
 
